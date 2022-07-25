@@ -1,17 +1,16 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "ES6",
     "module": "commonjs",
     "moduleResolution": "node",
+    "strictNullChecks": false,
     "sourceMap":  false,
     "declaration": true,
     "noImplicitAny": true,
     "outDir": "./dist",
-    "types": [],
   },
-  "include": [],
   "exclude": [
-    "node_modules",
+    "**/node_modules/**",
     "**/*.spec.ts"
   ],
 }
