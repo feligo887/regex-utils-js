@@ -10,7 +10,7 @@
 
 export function generalEmailReg ( email: string ): boolean {
 
-    return RegExp ('^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$').test ( email );
+    return RegExp ('^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\\\.[a-zA-Z0-9_-]+)+$').test ( email );
 }
 
 /**
@@ -22,5 +22,5 @@ export function generalEmailReg ( email: string ): boolean {
 
 export function generalZHEmailReg ( email: string ): boolean {
 
-    return RegExp ('^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$').test( email );
+    return RegExp ('^[A-Za-z0-9\\u4e00-\\u9fa5]+@[a-zA-Z0-9_-]+(\\\.[a-zA-Z0-9_-]+)+$').test( email );
 }
