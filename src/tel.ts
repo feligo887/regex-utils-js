@@ -10,7 +10,7 @@
  * **/
 export function loosePhoneReg ( mobile: string, scope?:`${number}-${number}`  ): boolean {
 
-    const reg = `^[1][${ scope || '3-9' }]\\d{9}$`;
+    const reg = `^[1][${ scope || '0-9' }]\\d{9}$`;
 
     return RegExp ( reg ).test ( mobile );
 
@@ -29,8 +29,6 @@ export  function strictPhoneReg ( mobile: string, isArea?: boolean  ): boolean {
 
     const reg = isArea ? '/^(?:(?:\\+|00)86)?1(?:(?:3[\\d])|(?:4[5-79])|(?:5[0-35-9])|(?:6[5-7])|(?:7[0-8])|(?:8[\\d])|(?:9[189]))\\d{8}$/'
         : '^1[3-9]\d{9}$';
-
-    console.log( reg )
 
    return RegExp ( reg ).test ( mobile );
 
