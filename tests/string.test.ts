@@ -1,6 +1,38 @@
 import { describe, expect, it } from 'vitest';
 
-import {  loosePhoneReg, strictPhoneReg, telPhoneReg } from '../src';
+import { generalEmailReg,  loosePhoneReg, strictPhoneReg, telPhoneReg } from '../src';
+
+describe ('邮箱正则测试',  () => {
+
+it ('常规邮箱格式校验', () => {
+
+    expect ( generalEmailReg('14e4e.com') ).toBeFalsy ();
+    expect ( generalEmailReg('14e4e@com') ).toBeFalsy ();
+    expect ( generalEmailReg('18888.com') ).toBeFalsy ();
+    expect ( generalEmailReg('zhangsan张三@qq.cn.com') ).toBeFalsy ();
+    expect ( generalEmailReg('zhangsan@qq.com') ).toBeTruthy ();
+    expect ( generalEmailReg('zhangsang_455hgfjgj@163.com') ).toBeTruthy ();
+    expect ( generalEmailReg('zhangs_76an@yang.com') ).toBeTruthy ();
+    expect ( generalEmailReg('888zhangsan123@yang.com') ).toBeTruthy ();
+    expect ( generalEmailReg('zhangsan_123@yang.com') ).toBeTruthy ();
+    expect ( generalEmailReg('zhangsan-123@yang.com') ).toBeTruthy ();
+    expect ( generalEmailReg('zhangsan@qq.cn.com') ).toBeTruthy ();
+
+
+} );
+
+it ('常规邮箱格式校验(包含中文)', () => {
+
+    expect ( generalEmailReg('zhangsan张三@qq.com', true ) ).toBeTruthy ();
+    expect ( generalEmailReg('zhangsan张三@qq.cn.com', true) ).toBeTruthy ();
+    expect ( generalEmailReg('zhangsan_张三@qq.com', true) ).toBeTruthy ();
+    expect (  generalEmailReg('zhangsan_张三@qq.cn.com', true ) ).toBeTruthy ();
+
+} );
+
+
+} );
+
 
 describe ('宽松手机号码校验测试', () => {
     it ('普通手机号码测试:', () => {
