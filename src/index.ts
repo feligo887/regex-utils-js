@@ -1,2 +1,1 @@
-export * from './tel';
-export * from './email';
+export * from './string';
