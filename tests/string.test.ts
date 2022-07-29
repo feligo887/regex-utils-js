@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { generalEmailReg,  loosePhoneReg, strictPhoneReg, telPhoneReg } from '../src';
+import { generalEmailReg,  loosePhoneReg, strictPhoneReg, telPhoneReg, chineseReg, englishReg, englishNumberReg } from '../src';
 
 describe ('邮箱正则测试',  () => {
 
@@ -113,4 +113,61 @@ describe ('国内固定电话号码测试', () => {
         expect( telPhoneReg ( '028-9867876-898800', true ) ).toBeTruthy ();
     })
 
+});
+
+describe ('中文字符正则测试', () => {
+    it ('中文字符测试', () => {
+        expect ( chineseReg ('zhangsan' ) ).toBeFalsy ();
+        expect ( chineseReg ('123' ) ).toBeFalsy ();
+        expect ( chineseReg ('...@!!!' ) ).toBeFalsy ();
+        expect ( chineseReg ('，' ) ).toBeFalsy ();
+        expect ( chineseReg ('  ' ) ).toBeFalsy ();
+        expect ( chineseReg ('中文' ) ).toBeTruthy ();
+
+    })
+    it ('中文字符长度范围测试', () => {
+        expect ( chineseReg ('1234', [1, 2] ) ).toBeFalsy ();
+        expect ( chineseReg ('中文三', [2, 2] ) ).toBeFalsy ();
+        expect ( chineseReg ('', [0, 2] ) ).toBeTruthy ();
+    });
+});
+
+describe ('英文字符正则测试', () => {
+    it ('英文字符测试', () => {
+        expect ( englishReg ('...@!!!' ) ).toBeFalsy ();
+        expect ( englishReg ('，' ) ).toBeFalsy ();
+        expect ( englishReg ('  ' ) ).toBeFalsy ();
+        expect ( englishReg ('中文' ) ).toBeFalsy ();
+        expect ( englishReg ('123' ) ).toBeFalsy ();
+        expect ( englishReg ('zhangsan' ) ).toBeTruthy ();
+        expect ( englishReg ('ADSDS' ) ).toBeTruthy ();
+        expect ( englishReg ('zhangsanADSDS' ) ).toBeTruthy ();
+
+    })
+    it ('英文字符长度范围测试', () => {
+        expect ( englishReg ('', [1, 2] ) ).toBeFalsy ();
+        expect ( englishReg ('aaa', [2, 2] ) ).toBeFalsy ();
+        expect ( englishReg ('', [0, 2] ) ).toBeTruthy ();
+    });
+});
+
+describe ('英文数字字符正则测试', () => {
+    it ('英文数字字符测试', () => {
+        expect ( englishNumberReg ('...@!!!' ) ).toBeFalsy ();
+        expect ( englishNumberReg ('，' ) ).toBeFalsy ();
+        expect ( englishNumberReg ('  ' ) ).toBeFalsy ();
+        expect ( englishNumberReg ('中文' ) ).toBeFalsy ();
+        expect ( englishNumberReg ('123' ) ).toBeTruthy ();
+        expect ( englishNumberReg ('zhangsan' ) ).toBeTruthy ();
+        expect ( englishNumberReg ('ADSDS123' ) ).toBeTruthy ();
+        expect ( englishNumberReg ('zhangsanADSDS123' ) ).toBeTruthy ();
+
+    })
+    it ('英文数字字符长度范围测试', () => {
+        expect ( englishNumberReg ('', [1, 2] ) ).toBeFalsy ();
+        expect ( englishNumberReg ('aaa', [2, 3] ) ).toBeTruthy ();
+        expect ( englishNumberReg ('123', [2, 3] ) ).toBeTruthy ();
+        expect ( englishNumberReg ('aaa123', [2, 6] ) ).toBeTruthy ();
+        expect ( englishNumberReg ('', [0, 2] ) ).toBeTruthy ();
+    });
 });
