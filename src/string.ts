@@ -87,7 +87,7 @@ export function chineseReg ( str: string, scope?: [ number, number ] ): boolean 
 }
 /**
  * 英文数字字符校验
- * @description 英文数字字符, 只要是字母和数字即可(只能有大小写字母和数字)，默认最少1个, 常用于用户名昵称等
+ * @description 英文数字字符, 只要是字母和数字即可(只能有大小写字母和数字)，默认最少1个
  * @param { string } str 英文数字字符
 * @param { [ number, number ] } scope 可指定英文数字字符的长度范围
  * **/
@@ -97,5 +97,39 @@ export function englishNumberReg ( str: string, scope?: [ number, number ] ): bo
     const reg = `^[A-Za-z0-9]{${ scope ? scope.join(','): '1,'}}$`;
 
     return RegExp(reg, 'g').test ( str );
+
+}
+
+/**
+ * 所有格式字符校验
+ * @description 所有格式字符，包含空白字符 默认最少1个，暂时不知道用于什么场景
+ * @param { string } str 需要校验的字符串
+ * @param { string } scope 可指定所有格式字符的长度范围，默认 1,
+ * 
+ * **/
+
+export function allStrReg ( str: string, scope?: [ number, number ] ): boolean {
+
+    const reg = `^.{${ scope ? scope.join(','): '1,' }}$`;
+
+    return RegExp(reg, 'gmi').test ( str );
+
+}
+
+/**
+ * 特殊字符校验
+ * @description 特殊字符，包含空白字符 默认最少1个，暂时不知道用于什么场景
+ * @param { string } str 需要校验的字符串
+ * @param { string } scope 可指定特殊字符，默认 !@#$%^&*()_+-=[]{}|;':",./<>?  
+ * 
+ * **/
+
+export function specialStrReg ( str: string, scope?: string ): boolean {
+
+    const defaultScope = `!@#$%^&*()_+-=[\\]{}|;':",\\./<>?`;
+
+    const reg = `^[${ scope || defaultScope }]+$`;
+
+    return RegExp(reg, 'gmi').test ( str );
 
 }

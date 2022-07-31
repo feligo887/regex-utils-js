@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
-import { generalEmailReg,  loosePhoneReg, strictPhoneReg, telPhoneReg, chineseReg, englishReg, englishNumberReg } from '../src';
+import { generalEmailReg,  loosePhoneReg, strictPhoneReg, telPhoneReg, chineseReg, englishReg, englishNumberReg,
+allStrReg, specialStrReg, } from '../src';
 
 describe ('邮箱正则测试',  () => {
 
@@ -170,4 +171,27 @@ describe ('英文数字字符正则测试', () => {
         expect ( englishNumberReg ('aaa123', [2, 6] ) ).toBeTruthy ();
         expect ( englishNumberReg ('', [0, 2] ) ).toBeTruthy ();
     });
+});
+
+describe ('所有格式字符校验正则测试', () => {
+    it ('字符有效性测试', () => {
+        expect ( allStrReg ('...@!!!' ) ).toBeTruthy ();
+        expect ( allStrReg ('，' ) ).toBeTruthy ();
+        expect ( allStrReg ('  ' ) ).toBeTruthy ();
+        expect ( allStrReg ('bjbj' ) ).toBeTruthy ();
+        expect ( allStrReg ('123s' ) ).toBeTruthy ();
+        expect ( allStrReg ('zhangsan' ) ).toBeTruthy ();
+        expect ( allStrReg ('ADSDS123', [ 1, 2] ) ).toBeFalsy ();
+        expect ( allStrReg ('AD', [ 1, 2] ) ).toBeTruthy ();
+        expect ( allStrReg ('zhangsanADSDS123' ) ).toBeTruthy ();
+
+    })
+});
+
+describe ('特殊字符校验正则测试', () => {
+    it ('特殊字符有效性测试', () => {
+        expect ( specialStrReg ('!@#$%^&*()_+-=[]{}|;:",./<>?' ) ).toBeTruthy ();
+        expect ( specialStrReg ('!a', '!@' ) ).toBeFalsy ();
+        expect ( specialStrReg ('!@>', '!@>' ) ).toBeTruthy ();
+    })
 });
