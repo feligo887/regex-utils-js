@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
-import { generalEmailReg,  loosePhoneReg, strictPhoneReg, telPhoneReg, chineseReg, englishReg, englishNumberReg,
-allStrReg, specialStrReg, } from '../src';
+import {  chineseReg, englishReg, englishNumberReg, allStrReg, specialStrReg, enZhNumberReg, customStrReg, generalEmailReg,  loosePhoneReg, strictPhoneReg, telPhoneReg,
+ domainUrlReg, netWorkUrlReg } from '../src';
 
 describe ('邮箱正则测试',  () => {
 
@@ -188,10 +188,62 @@ describe ('所有格式字符校验正则测试', () => {
     })
 });
 
+describe ('中文+英文+数字包括下划线正则测试', () => {
+    it ('字符有效性测试', () => {
+        expect ( enZhNumberReg ('中文' ) ).toBeTruthy ();
+        expect ( enZhNumberReg ('abc' ) ).toBeTruthy ();
+        expect ( enZhNumberReg ('ABC' ) ).toBeTruthy ();
+        expect ( enZhNumberReg ('ABC123' ) ).toBeTruthy ();
+        expect ( enZhNumberReg ('ABCaz123' ) ).toBeTruthy ();
+        expect ( enZhNumberReg ('123' ) ).toBeTruthy ();
+        expect ( enZhNumberReg ('中文ABCaz123' ) ).toBeTruthy ();
+    })
+});
+
 describe ('特殊字符校验正则测试', () => {
     it ('特殊字符有效性测试', () => {
         expect ( specialStrReg ('!@#$%^&*()_+-=[]{}|;:",./<>?' ) ).toBeTruthy ();
         expect ( specialStrReg ('!a', '!@' ) ).toBeFalsy ();
         expect ( specialStrReg ('!@>', '!@>' ) ).toBeTruthy ();
+    })
+});
+
+describe ('自定义字符校验正则测试', () => {
+    it ('自定义字符范围', () => {
+        expect ( customStrReg ('hvhv', 'A-Z' ) ).toBeFalsy ();
+        expect ( customStrReg ('hvhv', 'A-Z' ) ).toBeFalsy ();
+        expect ( customStrReg ('hvhv', 'A-Za-z' ) ).toBeTruthy ();
+        expect ( customStrReg ('123', '0-9' ) ).toBeTruthy ();
+        expect ( customStrReg ('hvhv145', 'A-Za-z0-9' ) ).toBeTruthy ();
+    })
+    it ('自定义字符范围及长度', () => {
+        expect ( customStrReg ('hvhv', '0-9', [1, 2] ) ).toBeFalsy ();
+        expect ( customStrReg ('AZVHHH', 'A-Z', [1, 3] ) ).toBeFalsy ();
+        expect ( customStrReg ('hV123', 'A-Za-z0-9', [1, 5] ) ).toBeTruthy ();
+        expect ( customStrReg ('hA', 'A-Za-z', [1, 2] ) ).toBeTruthy ();
+    })
+});
+
+describe ('域名校验正则测试', () => {
+    it ('域名合法性测试', () => {
+        expect ( domainUrlReg ('hvhv' ) ).toBeFalsy ();
+        expect ( domainUrlReg ('!aas' ) ).toBeFalsy ();
+        expect ( domainUrlReg ('a.com' ) ).toBeFalsy ();
+        expect ( domainUrlReg ('www.baidu.com.cn' ) ).toBeTruthy ();
+        expect ( domainUrlReg ('http://www.baidu.com' ) ).toBeTruthy ();
+        expect ( domainUrlReg ('https://www.baidu.com' ) ).toBeTruthy ();
+        expect ( domainUrlReg ('www.baidu99.com' ) ).toBeTruthy ();
+        expect ( domainUrlReg ('www.baidu.com' ) ).toBeTruthy ();
+        expect ( domainUrlReg ('a.com.cn' ) ).toBeTruthy ();
+    })
+});
+
+describe ('域名校验正则测试', () => {
+    it ('域名合法性测试', () => {
+        expect ( netWorkUrlReg ('http://www.baidu.com' ) ).toBeTruthy ();
+        expect ( netWorkUrlReg ('http://www.baidu.com' ) ).toBeTruthy ();
+        expect ( netWorkUrlReg ('https://www.baidu.com' ) ).toBeTruthy ();
+        expect ( netWorkUrlReg ('https://www.baidu.com', 'http' ) ).toBeFalsy ();
+        expect ( netWorkUrlReg ('https://www.baidu.com', 'https' ) ).toBeTruthy ();
     })
 });
