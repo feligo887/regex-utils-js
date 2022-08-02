@@ -171,7 +171,7 @@ export function telPhoneReg ( tel: string, isExtension?:boolean ): boolean {
 
  export function domainUrlReg ( str:string ):boolean {
 
-    return /[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/i.test ( str )
+    return /^(?=^.{3,255}$)[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+$/gi.test ( str )
  }
 
  /**
