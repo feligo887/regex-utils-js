@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
-import {  chineseReg, englishReg, englishNumberReg, allStrReg, specialStrReg, enZhNumberReg, customStrReg, generalEmailReg,  loosePhoneReg, strictPhoneReg, telPhoneReg,
- domainUrlReg, netWorkUrlReg } from '../src';
+import {  chineseReg, englishReg, englishNumberReg, allStrReg, specialStrReg, enZhNumberReg, customStrReg, generalEmailReg,  loosePhoneReg, strictPhoneReg, chinaTelPhoneReg,
+    telPhoneReg, domainUrlReg, netWorkUrlReg } from '../src';
 
 describe ('邮箱正则测试',  () => {
 
@@ -87,33 +87,45 @@ describe ('严格手机号码校验测试', () => {
 
 describe ('国内固定电话号码测试', () => {
     it ('固定电话号码格式测试:', () => {
-        expect( telPhoneReg ( '04098786544' ) ).toBeFalsy ();
-        expect( telPhoneReg ( '040-276-87789877' ) ).toBeFalsy ();
-        expect( telPhoneReg ( 'abc-028-1234' ) ).toBeFalsy ();
-        expect( telPhoneReg ( '400-7898' ) ).toBeFalsy ();
-        expect( telPhoneReg ( '400-789897799' ) ).toBeFalsy ();
-        expect( telPhoneReg ( '4000-jhjh' ) ).toBeFalsy ();
-        expect( telPhoneReg ( '4000-jhjh1237' ) ).toBeFalsy ();
-        expect( telPhoneReg ( '04000-78989779' ) ).toBeFalsy ();
-        expect( telPhoneReg ( '0400-78989779' ) ).toBeTruthy ();
-        expect( telPhoneReg ( '0280-78989779' ) ).toBeTruthy ();
-        expect( telPhoneReg ( '028-98678766' ) ).toBeTruthy ();
+        expect( chinaTelPhoneReg ( '04098786544' ) ).toBeFalsy ();
+        expect( chinaTelPhoneReg ( '+442912345678' ) ).toBeFalsy ();
+        expect( chinaTelPhoneReg ( '+14255550100' ) ).toBeFalsy ();
+        expect( chinaTelPhoneReg ( '040-276-87789877' ) ).toBeFalsy ();
+        expect( chinaTelPhoneReg ( 'abc-028-1234' ) ).toBeFalsy ();
+        expect( chinaTelPhoneReg ( '400-7898' ) ).toBeFalsy ();
+        expect( chinaTelPhoneReg ( '400-789897799' ) ).toBeFalsy ();
+        expect( chinaTelPhoneReg ( '4000-jhjh' ) ).toBeFalsy ();
+        expect( chinaTelPhoneReg ( '4000-jhjh1237' ) ).toBeFalsy ();
+        expect( chinaTelPhoneReg ( '04000-78989779' ) ).toBeFalsy ();
+        expect( chinaTelPhoneReg ( '0400-78989779' ) ).toBeTruthy ();
+        expect( chinaTelPhoneReg ( '0280-78989779' ) ).toBeTruthy ();
+        expect( chinaTelPhoneReg ( '028-98678766' ) ).toBeTruthy ();
     })
 
     it ('固定电话号码-分机号码格式测试:', () => {
-        expect( telPhoneReg ( '040-276-87789877', true ) ).toBeFalsy ();
-        expect( telPhoneReg ( 'abc-028-1234', true  ) ).toBeFalsy ();
-        expect( telPhoneReg ( '400-7898' , true ) ).toBeFalsy ();
-        expect( telPhoneReg ( '400-789897799', true  ) ).toBeFalsy ();
-        expect( telPhoneReg ( '4000-jhjh' , true)  ).toBeFalsy ();
-        expect( telPhoneReg ( '4000-jhjh1237', true  ) ).toBeFalsy ();
-        expect( telPhoneReg ( '04000-78989779', true ) ).toBeFalsy ();
-        expect( telPhoneReg ( '028-98678766-8988900', true ) ).toBeFalsy ();
-        expect( telPhoneReg ( '028-78989779-123', true ) ).toBeTruthy ();
-        expect( telPhoneReg ( '0280-78989779-5687', true ) ).toBeTruthy ();
-        expect( telPhoneReg ( '028-9867876-898800', true ) ).toBeTruthy ();
+        expect( chinaTelPhoneReg ( '040-276-87789877', true ) ).toBeFalsy ();
+        expect( chinaTelPhoneReg ( 'abc-028-1234', true  ) ).toBeFalsy ();
+        expect( chinaTelPhoneReg ( '400-7898' , true ) ).toBeFalsy ();
+        expect( chinaTelPhoneReg ( '400-789897799', true  ) ).toBeFalsy ();
+        expect( chinaTelPhoneReg ( '4000-jhjh' , true)  ).toBeFalsy ();
+        expect( chinaTelPhoneReg ( '4000-jhjh1237', true  ) ).toBeFalsy ();
+        expect( chinaTelPhoneReg ( '04000-78989779', true ) ).toBeFalsy ();
+        expect( chinaTelPhoneReg ( '028-98678766-8988900', true ) ).toBeFalsy ();
+        expect( chinaTelPhoneReg ( '028-78989779-123', true ) ).toBeTruthy ();
+        expect( chinaTelPhoneReg ( '0280-78989779-5687', true ) ).toBeTruthy ();
+        expect( chinaTelPhoneReg ( '028-9867876-898800', true ) ).toBeTruthy ();
     })
 
+});
+
+describe ('国际固定电话号码测试', () => {
+    it ('国际固定电话号码格式测试:', () => {
+        expect( telPhoneReg ( '+442912345678' ) ).toBeTruthy ();
+        expect( telPhoneReg ( '+14255550100' ) ).toBeTruthy ();
+        expect( telPhoneReg ( '+14255550100' ) ).toBeTruthy ();
+        expect( telPhoneReg ( '0019898777' ) ).toBeTruthy ();
+        expect( telPhoneReg ( '+186-22212148' ) ).toBeTruthy ();
+    })
 });
 
 describe ('中文字符正则测试', () => {

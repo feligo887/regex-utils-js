@@ -148,18 +148,32 @@ export  function strictPhoneReg ( mobile: string, isArea?: boolean  ): boolean {
 
 }
 /**
- * 固定电话号码校验 XXX-XXXXXXX XXXX-XXXXXXXX xxxx-xxxxxxx-xxxxx
+ * 国内固定电话号码校验 0511-4405222、021-87888822
  * @description 固定电话号码(telephone number)中国, 只要是区号+号码(3+8、4+8)组成即可
  * @param { string } tel 固定电话号码
  * @param { boolean } isExtension 是否需要分机号码
  * @return boolean
  * **/
 
-export function telPhoneReg ( tel: string, isExtension?:boolean ): boolean {
+export function chinaTelPhoneReg ( tel: string, isExtension?:boolean ): boolean {
 
-    const reg = !isExtension ? /^(0?\d{2,3})-\d{7,8}$/g : /^(0?\d{2,3})-(\d{7,8})-(\d{1,6})$/g;
+    const reg = !isExtension ? /^(0?\d{3})-\d{7,8}$/g : /^(0?\d{3})-(\d{7,8})-(\d{1,6})$/g;
 
     return reg.test ( tel );
+}
+
+/**
+ * 固定电话号码校验 "XXX-XXXXXXX"、"XXXX-XXXXXXXX"、"XXX-XXXXXXX"、"XXX-XXXXXXXX"、"XXXXXXX"和"XXXXXXXX
+ * @description 固定电话号码(telephone number)中国, 只要是区号+号码(3+8、4+8)组成即可
+ * @param { string } tel 固定电话号码
+ * @return boolean
+ * **/
+
+export function telPhoneReg ( tel: string ): boolean {
+
+    const reg = '^(\\+|00)[1-9][0-9 \\-\\(\\)\\.]{7,32}$';
+
+    return RegExp( reg, 'g').test ( tel );
 }
 
 /**
