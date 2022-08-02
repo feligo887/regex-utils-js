@@ -228,19 +228,22 @@ describe ('域名校验正则测试', () => {
     it ('域名合法性测试', () => {
         expect ( domainUrlReg ('hvhv' ) ).toBeFalsy ();
         expect ( domainUrlReg ('!aas' ) ).toBeFalsy ();
-        expect ( domainUrlReg ('a.com' ) ).toBeFalsy ();
+        expect ( domainUrlReg ('http://www.baidu.com' ) ).toBeFalsy ();
+        expect ( domainUrlReg ('https://www.baidu.com' ) ).toBeFalsy ();
+        expect ( domainUrlReg ('a.com' ) ).toBeTruthy ();
         expect ( domainUrlReg ('www.baidu.com.cn' ) ).toBeTruthy ();
-        expect ( domainUrlReg ('http://www.baidu.com' ) ).toBeTruthy ();
-        expect ( domainUrlReg ('https://www.baidu.com' ) ).toBeTruthy ();
         expect ( domainUrlReg ('www.baidu99.com' ) ).toBeTruthy ();
         expect ( domainUrlReg ('www.baidu.com' ) ).toBeTruthy ();
         expect ( domainUrlReg ('a.com.cn' ) ).toBeTruthy ();
     })
 });
 
-describe ('域名校验正则测试', () => {
+describe ('网络链接校验正则测试', () => {
     it ('域名合法性测试', () => {
+        expect ( netWorkUrlReg ('www.baidu.com' ) ).toBeFalsy ();
+        expect ( netWorkUrlReg ('a.baidu.com' ) ).toBeFalsy ();
         expect ( netWorkUrlReg ('http://www.baidu.com' ) ).toBeTruthy ();
+        expect ( netWorkUrlReg ('http://www.baidu.com.cn' ) ).toBeTruthy ();
         expect ( netWorkUrlReg ('http://www.baidu.com' ) ).toBeTruthy ();
         expect ( netWorkUrlReg ('https://www.baidu.com' ) ).toBeTruthy ();
         expect ( netWorkUrlReg ('https://www.baidu.com', 'http' ) ).toBeFalsy ();
