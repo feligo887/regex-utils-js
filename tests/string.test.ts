@@ -19,7 +19,6 @@ it ('常规邮箱格式校验', () => {
     expect ( generalEmailReg('zhangsan-123@yang.com') ).toBeTruthy ();
     expect ( generalEmailReg('zhangsan@qq.cn.com') ).toBeTruthy ();
 
-
 } );
 
 it ('常规邮箱格式校验(包含中文)', () => {
@@ -30,7 +29,6 @@ it ('常规邮箱格式校验(包含中文)', () => {
     expect (  generalEmailReg('zhangsan_张三@qq.cn.com', true ) ).toBeTruthy ();
 
 } );
-
 
 } );
 
