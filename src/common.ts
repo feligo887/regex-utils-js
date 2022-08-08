@@ -126,3 +126,49 @@ export  function strictIdCardReg ( str:string ):boolean {
 
     return  RegExp( reg ).test ( str );
 }
+
+/**
+ * 密码正则校验
+ * @description 密码规则:密码长度为8 ~ 20个字符，由数字、大写字母、小写字母和特殊字符组成, 默认8-20位字符
+ * @param { string } str
+ * @param { [ number, number ] } len [ min, max ] 密码长度范围
+ * @return boolean
+ * **/
+
+export function passwordReg ( str: string, len?: [ number, number] ): boolean {
+
+    const reg = `^(?=.*[a-z])(?=.*[A-Z])(?=.*\\\d)(?=.*[!@#$&*\\\(\\\)_\\\-+=\\\[\\\]:;\\\?,.])[A-Za-z\\\d!@#$&*\\\(\\)_\\\-+=\\\[\\\]:;\\\?,.]{${len ? len.join(',') : '8,20'}}$`;
+
+    return RegExp(reg, 'g').test ( str );
+
+}
+
+/**
+ * 昵称正则校验
+ * @description 昵称规则:数字、大小写字母和特殊字符-_+，长度不超过30个字符
+ *  @param { string } str 需要校验的字符串
+ *  @return boolean
+ * **/
+
+
+export  function fieldNameReg ( str: string ): boolean {
+
+    const reg = /^[a-zA-Z0-9\d!@#$&*\(\)_\-+=\[\]:;\?,.]{1,30}$/;
+
+   return  reg.test ( str );
+
+}
+
+/**
+ *
+ * @desc 十六进制颜色正则校验
+ * @param  { string }  str 需要校验的字符串
+ * @return boolean
+ */
+
+export function hexColorReg ( str: string ): boolean {
+
+    const reg = /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{3,6})$/;
+
+    return  reg.test ( str );
+}

@@ -1,7 +1,7 @@
-import { generalEmailReg, loosePhoneReg, strictPhoneReg, chinaTelPhoneReg, telPhoneReg, domainUrlReg, netWorkUrlReg,
-    looseIdCardReg, strictIdCardReg } from '../src';
-
 import { describe, expect, it } from "vitest";
+
+import { generalEmailReg, loosePhoneReg, strictPhoneReg, chinaTelPhoneReg, telPhoneReg, domainUrlReg, netWorkUrlReg,
+    looseIdCardReg, strictIdCardReg, passwordReg, fieldNameReg, hexColorReg } from '../src';
 
 describe ('邮箱正则测试',  () => {
 
@@ -173,5 +173,37 @@ describe ('身份证号码校验正则测试', () => {
         expect ( strictIdCardReg ('510711199102318970' ) ).toBeFalsy ();
         expect (  strictIdCardReg ('110223790813697') ).toBeTruthy ();
         expect ( strictIdCardReg ('110225196403026127' ) ).toBeTruthy ();
+    })
+});
+
+describe ('密码正则测试', () => {
+    it ('密码长度测试', () => {
+        expect (  passwordReg ('x123X@' ) ).toBeFalsy ();
+        expect (  passwordReg ('x123X@x123X@x123X@x123X@x123X@x123X@x123X@' ) ).toBeFalsy ();
+        expect (  passwordReg ('123@a!A', [ 7, 20] ) ).toBeTruthy ();
+    })
+    it ('密码强度测试', () => {
+        expect ( passwordReg ('123456') ).toBeFalsy ();
+        expect ( passwordReg ('123x') ).toBeFalsy ();
+        expect ( passwordReg ('123x!') ).toBeFalsy ();
+        expect ( passwordReg ('123x!Z@12') ).toBeTruthy ();
+    })
+});
+
+describe ('昵称正则测试', () => {
+    it ('昵称合法性正则测试', () => {
+        expect (  fieldNameReg ('@12' ) ).toBeTruthy ();
+        expect (  fieldNameReg ('123aaa123aaa123aaa123aaa' ) ).toBeTruthy ();
+        expect (  fieldNameReg ('!@2+-gg' ) ).toBeTruthy ();
+    })
+});
+
+describe ('颜色正则测试', () => {
+    it ('十六进制颜色', () => {
+        expect (  hexColorReg ('#ff' ) ).toBeFalsy ();
+        expect (  hexColorReg ('@ff12bg' ) ).toBeFalsy ();
+        expect (  hexColorReg ('#fff' ) ).toBeTruthy ();
+        expect (  hexColorReg ('#123' ) ).toBeTruthy ();
+        expect (  hexColorReg ('#ffffff' ) ).toBeTruthy ();
     })
 });
