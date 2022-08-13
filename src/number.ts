@@ -14,6 +14,19 @@ export function numberOrFloatReg ( str: string ): boolean {
 }
 
 /**
+ * 数字正则校验
+ * @param { string } str 需要检查的字符串
+ * @param{ [ number, number ] } range 可选，数字范围，默认[-Infinity, Infinity]
+ * @return boolean
+**/
+export function numberReg ( str: string, len?: [ number, number? ] ): boolean {
+
+    const reg = `^\\d${ len ? `{${ len.join(',')}}` : '' }$`;
+
+    return RegExp ( reg ).test ( str );
+}
+
+/**
  * 整数正则校验
  * @description
  * @param { string } str 需要检查的字符串
