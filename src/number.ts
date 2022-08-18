@@ -3,6 +3,7 @@ import {loosePhoneReg} from "./common";
 /**
  * 检查数字精度，整数大于0，小数点最高可达8位19.8n精度
  *@param { string } str 需要检查的字符串
+ * @return { boolean } 是否符合精度要求
  * **/
 
 export function numberOrFloatReg ( str: string ): boolean {
@@ -13,21 +14,9 @@ export function numberOrFloatReg ( str: string ): boolean {
 
 }
 
+
 /**
  * 数字正则校验
- * @param { string } str 需要检查的字符串
- * @param{ [ number, number ] } range 可选，数字范围，默认[-Infinity, Infinity]
- * @return boolean
-**/
-export function numberReg ( str: string, len?: [ number, number? ] ): boolean {
-
-    const reg = `^\\d${ len ? `{${ len.join(',')}}` : '' }$`;
-
-    return RegExp ( reg ).test ( str );
-}
-
-/**
- * 整数正则校验
  * @description
  * @param { string } str 需要检查的字符串
  * @param { boolean } minus 是否支持负数
