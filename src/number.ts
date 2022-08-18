@@ -1,5 +1,3 @@
-import {loosePhoneReg} from "./common";
-
 /**
  * 检查数字精度，整数大于0，小数点最高可达8位19.8n精度
  *@param { string } str 需要检查的字符串
