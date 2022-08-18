@@ -45,13 +45,11 @@ describe ('小数正则测试', () => {
     it ('合法性测试', () => {
         expect( strictDecimalsReg ('0.' ) ).toBeFalsy ();
         expect( strictDecimalsReg ('12.' ) ).toBeFalsy ();
-        expect( strictDecimalsReg ('0.0123' ) ).toBeFalsy ();
         expect( strictDecimalsReg ('00.0123' ) ).toBeFalsy ();
         expect( strictDecimalsReg ('013.88' ) ).toBeFalsy ();
         expect( strictDecimalsReg ('-0.0123' ) ).toBeFalsy ();
-
-        // 需要处理此问题 TODO
-        // expect( strictDecimalsReg ('-0.01', { minus: true } ) ).toBeTruthy ();
+        expect( strictDecimalsReg ('0.0123' ) ).toBeTruthy ();
+        expect( strictDecimalsReg ('-0.01', { minus: true } ) ).toBeTruthy ();
         expect( strictDecimalsReg ('12.21' ) ).toBeTruthy ();
     })
 })

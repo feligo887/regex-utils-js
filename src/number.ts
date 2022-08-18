@@ -39,24 +39,28 @@ export function  integerReg ( str: string, minus?: boolean ): boolean {
 
 export function looseDecimalsReg ( str: string, decimalsMax?: number ): boolean {
 
-    const reg = `^(-)?\\d+\.{0,1}\\d{1,${ decimalsMax || 8 }}$`;
+    const reg = RegExp ( `^(-)?\\d+\.{1,1}\\d{1,${ decimalsMax || 8 }}$`, 'g');
 
-    return RegExp ( reg, 'g' ).test ( str );
+    return reg.test ( str );
 
 }
 
 /**
  * 严格小数正则校验, 支持负数
- * @description 01.xxx 00.xxx 不可通过
+ * @description 01.xxx 00.xxx 不可通过， 支持 0
  * @param { string } str 需要检查的字符串
  * @param { Object } options 配置项
- * @param { number } options.decimals 支持的小数位数，默认两位小数
+ * @param { number } options.decimalsMax 支持的小数位数，默认八位小数
  * @param { boolean } options.minus 是否支持负数，默认false
  * **/
 
-export function strictDecimalsReg ( str: string, options?: { decimals?: number, minus?: boolean } ): boolean {
+export function strictDecimalsReg ( str: string, options?: { decimalsMax?: number, minus?: boolean } ): boolean {
 
-    const reg = `^${ ( options && options.minus === true ) ? '(-)?' : '' }(\\0{0,1}|[1-9])+\\.{0,1}\\d{1,${ options?.decimals || 2 }}$`;
+     const minusReg = options && options.minus ? '-?' : '';
+
+     const decimalsReg = options && options.decimalsMax ? `{1, ${options.decimalsMax}` : '{1,8}';
+
+    const reg = `(^${minusReg}[1-9]\\d*\.\\d${decimalsReg}$|^${minusReg}0\\.\\d${decimalsReg}$|^${minusReg}[1-9]\\d{1,2}$|^0{1}$)`;
 
     return RegExp ( reg, 'g' ).test ( str );
 
