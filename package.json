@@ -4,13 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "docs": "typedoc && serve ./docs",
     "build": "tsup",
     "test": "vitest",
     "test:ui": "vitest --ui",
     "coverage": "vitest run --coverage"
   },
-  "keywords": [],
+  "keywords": ["regex", "utils", "javascript", "typescript", "common", "helper"],
   "author": "zhaoguiyang",
   "license": "ISC",
   "devDependencies": {
