@@ -1,3 +1,5 @@
+import { strictDecimalsReg, integerReg } from './number';
+
 /**
  *  常规邮箱格式校验
  * @description  `gaozihang-001@gmail.com` 只允许英文字母、数字、下划线、英文句号、以及中划线组成
@@ -171,4 +173,49 @@ export function hexColorReg ( str: string ): boolean {
     const reg = /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{3,6})$/;
 
     return  reg.test ( str );
+}
+
+
+/**
+ * @description 金额正则校验
+ *@param { string } str 需要校验的字符串
+ * @param { Object } options 配置项
+ * @param { number } options.decimalsMax 支持的小数位数，默认八位小数
+ * @param { boolean } options.minus 是否支持负数，默认false
+ * @return boolean
+ * **/
+
+export function moneyReg ( str: string, options?: { minus?: boolean, decimalsMax?: 2 } ): boolean {
+
+    return integerReg ( str, options?.minus ) || strictDecimalsReg ( str, options );
+
+
+}
+
+
+/**
+ * @description 千分位正则校验 10,000.00 100,000,000 199999
+ * @param { string } str 需要校验的字符串
+ *@return boolean
+ * **/
+
+export function thousandsMoneyReg ( str: string ): boolean {
+
+    const reg = `^([0-9]+|[0-9]{1,3}(,[0-9]{3})*)(.[0-9]{1,2})?$`
+
+    return RegExp ( reg ).test ( str );
+}
+
+/**
+ * @description IP正则校验
+ * @param { string } str 需要校验的字符串
+ * @return boolean
+ * **/
+
+export function ipReg ( str: string ): boolean {
+
+    const reg = /((?:(?:25[0-5]|2[0-4]\d|[01]?\d?\d)\.){3}(?:25[0-5]|2[0-4]\d|[01]?\d?\d))/
+
+    return  reg.test ( str );
+
 }

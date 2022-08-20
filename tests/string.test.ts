@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
-import {  chineseReg, englishReg, englishNumberReg, allStrReg, specialStrReg, enZhNumberReg, customStrReg } from '../src';
+import { chineseReg, englishReg, upperEnglishReg, lowerEnglishReg, englishNumberReg, allStrReg, specialStrReg,
+         enZhNumberReg, customStrReg } from '../src';
 
 describe ('中文字符正则测试', () => {
     it ('中文字符测试', () => {
@@ -31,6 +32,27 @@ describe ('英文字符正则测试', () => {
         expect ( englishReg ('zhangsanADSDS' ) ).toBeTruthy ();
 
     })
+
+    it ('大写英文字符测试', () => {
+
+        expect ( upperEnglishReg('AGJHGJGhhmk' ) ).toBeFalsy ();
+        expect ( upperEnglishReg('jjj' ) ).toBeFalsy ();
+        expect ( upperEnglishReg('GJHGJGH', [ 1, 3 ] ) ).toBeFalsy ();
+        expect ( upperEnglishReg('GJHGJGH' ) ).toBeTruthy ();
+        expect ( upperEnglishReg('HH', [ 1, 2 ] ) ).toBeTruthy ()
+
+    })
+
+    it ('小写英文字符测试', () => {
+
+        expect ( lowerEnglishReg('GJHGJGH' ) ).toBeFalsy ();
+        expect ( lowerEnglishReg('ggHH' ) ).toBeFalsy ();
+        expect ( lowerEnglishReg('gggg', [ 1, 1 ] ) ).toBeFalsy ();
+        expect ( lowerEnglishReg('gggg' ) ).toBeTruthy ();
+        expect ( lowerEnglishReg('gggg', [ 4, 4 ] ) ).toBeTruthy ();
+
+    })
+
     it ('英文字符长度范围测试', () => {
         expect ( englishReg ('', [1, 2] ) ).toBeFalsy ();
         expect ( englishReg ('aaa', [2, 2] ) ).toBeFalsy ();

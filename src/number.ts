@@ -58,7 +58,7 @@ export function strictDecimalsReg ( str: string, options?: { decimalsMax?: numbe
 
      const minusReg = options && options.minus ? '-?' : '';
 
-     const decimalsReg = options && options.decimalsMax ? `{1, ${options.decimalsMax}` : '{1,8}';
+     const decimalsReg = options && options.decimalsMax ? `{1,${options.decimalsMax}}` : '{1,8}';
 
     const reg = `(^${minusReg}[1-9]\\d*\.\\d${decimalsReg}$|^${minusReg}0\\.\\d${decimalsReg}$|^${minusReg}[1-9]\\d{1,2}$|^0{1}$)`;
 

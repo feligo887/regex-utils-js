@@ -1,7 +1,8 @@
 import { describe, expect, it } from "vitest";
 
 import { generalEmailReg, loosePhoneReg, strictPhoneReg, chinaTelPhoneReg, telPhoneReg, domainUrlReg, netWorkUrlReg,
-    looseIdCardReg, strictIdCardReg, passwordReg, fieldNameReg, hexColorReg } from '../src';
+         looseIdCardReg, strictIdCardReg, passwordReg, fieldNameReg, hexColorReg, moneyReg, thousandsMoneyReg,
+         ipReg } from '../src';
 
 describe ('邮箱正则测试',  () => {
 
@@ -207,3 +208,39 @@ describe ('颜色正则测试', () => {
         expect (  hexColorReg ('#ffffff' ) ).toBeTruthy ();
     })
 });
+
+describe ('金额测试', () => {
+
+    it ('数字金额合法性测试', () => {
+
+        expect ( moneyReg('0' ) ).toBeTruthy ();
+        expect ( moneyReg('0.00' ) ).toBeTruthy ();
+        expect ( moneyReg('0.1' ) ).toBeTruthy ();
+        expect ( moneyReg('11.100' ) ).toBeTruthy ();
+        expect ( moneyReg('100.00' ) ).toBeTruthy ();
+        expect ( moneyReg('101.1' ) ).toBeTruthy ();
+        expect ( moneyReg('9999.0001' ) ).toBeTruthy ();
+        expect ( moneyReg('-11', { minus: true } ) ).toBeTruthy ();
+        expect ( moneyReg('-0.111', { minus: true } ) ).toBeTruthy();
+        expect ( moneyReg('12.11', { decimalsMax: 2 } ) ).toBeTruthy();
+        expect ( moneyReg('-12.11', { minus: true, decimalsMax: 2 } ) ).toBeTruthy();
+
+    })
+    it ('千分位金额测试', () => {
+
+        expect( thousandsMoneyReg ('10,000.00') ).toBeTruthy ();
+        expect( thousandsMoneyReg ('100,000,000') ).toBeTruthy ();
+        expect( thousandsMoneyReg ('199999') ).toBeTruthy ();
+
+    });
+})
+
+describe ('ip地址测试', () => {
+
+    it ('ip地址合法性测试', () => {
+
+        expect ( ipReg ('127.0.0.1') ).toBeTruthy ();
+        expect ( ipReg ('192.168.10.1') ).toBeTruthy ();
+
+    })
+})

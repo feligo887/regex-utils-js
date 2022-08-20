@@ -25,6 +25,35 @@ export function chineseReg ( str: string, scope?: [ number, number ] ): boolean 
 
     return RegExp(reg, 'g').test ( str );
 }
+
+/**
+ * 大写英文字符校验
+ * @description 大写英文字符，只要是大写字母即可(只能有大写字母)
+ * @param { string } str 需要验证的字符串
+ * @param { [ number, number ] } scope 可指定英文字符的长度范围
+ * **/
+
+export function upperEnglishReg ( str: string, scope?: [ number, number ] ): boolean {
+
+    const reg = `^[A-Z]{${ scope ? scope.join(','): '1,' }}$`;
+
+    return  RegExp(reg, 'g').test ( str );
+}
+
+/**
+ * 小写英文字符校验
+ * @description 大写英文字符，只要是大写字母即可(只能有大写字母)
+ * @param { string } str 需要验证的字符串
+ * @param { [ number, number ] } scope 可指定英文字符的长度范围
+ * **/
+
+export function lowerEnglishReg ( str: string, scope?: [ number, number ] ): boolean {
+
+    const reg = `^[a-z]{${ scope ? scope.join(','): '1,' }}$`;
+
+    return  RegExp(reg, 'g').test ( str );
+}
+
 /**
  * 英文数字字符校验
  * @description 英文数字字符, 只要是字母和数字即可(只能有大小写字母和数字)，默认最少1个
