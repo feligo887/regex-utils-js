@@ -6,9 +6,9 @@
 
 export function numberOrFloatReg ( str: string ): boolean {
 
-    const reg = /^[1-9]+([.]{1}[0-9]{1,8})?$/;
+  const reg = /^[1-9]+([.]{1}[0-9]{1,8})?$/;
 
-   return reg.test ( str );
+  return reg.test ( str );
 
 }
 
@@ -21,11 +21,11 @@ export function numberOrFloatReg ( str: string ): boolean {
  * @return { boolean } 是否匹配
  * **/
 
-export function  integerReg ( str: string, minus?: boolean ): boolean {
+export function integerReg ( str: string, minus?: boolean ): boolean {
 
-    const reg = `^${ minus ? '(?:-)' : '' }[1-9]+[0-9]*$`;
+  const reg = `^${ minus ? '(?:-)' : '' }[1-9]+[0-9]*$`;
 
-    return RegExp( reg ).test ( str );
+  return RegExp ( reg ).test ( str );
 
 }
 
@@ -39,9 +39,9 @@ export function  integerReg ( str: string, minus?: boolean ): boolean {
 
 export function looseDecimalsReg ( str: string, decimalsMax?: number ): boolean {
 
-    const reg = RegExp ( `^(-)?\\d+\.{1,1}\\d{1,${ decimalsMax || 8 }}$`, 'g');
+  const reg = RegExp ( `^(-)?\\d+\.{1,1}\\d{1,${ decimalsMax || 8 }}$`, 'g' );
 
-    return reg.test ( str );
+  return reg.test ( str );
 
 }
 
@@ -56,12 +56,12 @@ export function looseDecimalsReg ( str: string, decimalsMax?: number ): boolean 
 
 export function strictDecimalsReg ( str: string, options?: { decimalsMax?: number, minus?: boolean } ): boolean {
 
-     const minusReg = options && options.minus ? '-?' : '';
+  const minusReg = options && options.minus ? '-?' : '';
 
-     const decimalsReg = options && options.decimalsMax ? `{1,${options.decimalsMax}}` : '{1,8}';
+  const decimalsReg = options && options.decimalsMax ? `{1,${options.decimalsMax}}` : '{1,8}';
 
-    const reg = `(^${minusReg}[1-9]\\d*\.\\d${decimalsReg}$|^${minusReg}0\\.\\d${decimalsReg}$|^${minusReg}[1-9]\\d{1,2}$|^0{1}$)`;
+  const reg = `(^${minusReg}[1-9]\\d*\.\\d${decimalsReg}$|^${minusReg}0\\.\\d${decimalsReg}$|^${minusReg}[1-9]\\d{1,2}$|^0{1}$)`;
 
-    return RegExp ( reg, 'g' ).test ( str );
+  return RegExp ( reg, 'g' ).test ( str );
 
 }

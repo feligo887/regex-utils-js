@@ -5,11 +5,13 @@
  * @param { [ number, number ] } scope 可指定中文字符的长度范围
  * @return boolean
  * **/
+
 export function chineseReg ( str: string, scope?: [ number, number ] ): boolean {
 
-    const reg = `^[\\u4e00-\\u9fa5]{${ scope ? scope.join(','): '1,' }}$`;
+  const reg = `^[\\u4e00-\\u9fa5]{${ scope ? scope.join ( ',' ) : '1,' }}$`;
 
-    return RegExp(reg, 'g').test ( str );
+  return RegExp ( reg, 'g' ).test ( str );
+
 }
 
 /**
@@ -19,11 +21,13 @@ export function chineseReg ( str: string, scope?: [ number, number ] ): boolean 
  * @param { [ number, number ] } scope 可指定英文字符的长度范围
  * @return boolean
  * **/
- export function englishReg ( str: string, scope?: [ number, number ] ): boolean {
 
-    const reg = `^[a-zA-Z]{${ scope ? scope.join(','): '1,' }}$`;
+export function englishReg ( str: string, scope?: [ number, number ] ): boolean {
 
-    return RegExp(reg, 'g').test ( str );
+  const reg = `^[a-zA-Z]{${ scope ? scope.join ( ',' ) : '1,' }}$`;
+
+  return RegExp ( reg, 'g' ).test ( str );
+
 }
 
 /**
@@ -35,9 +39,10 @@ export function chineseReg ( str: string, scope?: [ number, number ] ): boolean 
 
 export function upperEnglishReg ( str: string, scope?: [ number, number ] ): boolean {
 
-    const reg = `^[A-Z]{${ scope ? scope.join(','): '1,' }}$`;
+  const reg = `^[A-Z]{${ scope ? scope.join ( ',' ) : '1,' }}$`;
 
-    return  RegExp(reg, 'g').test ( str );
+  return RegExp ( reg, 'g' ).test ( str );
+
 }
 
 /**
@@ -49,9 +54,10 @@ export function upperEnglishReg ( str: string, scope?: [ number, number ] ): boo
 
 export function lowerEnglishReg ( str: string, scope?: [ number, number ] ): boolean {
 
-    const reg = `^[a-z]{${ scope ? scope.join(','): '1,' }}$`;
+  const reg = `^[a-z]{${ scope ? scope.join ( ',' ) : '1,' }}$`;
 
-    return  RegExp(reg, 'g').test ( str );
+  return RegExp ( reg, 'g' ).test ( str );
+
 }
 
 /**
@@ -63,9 +69,10 @@ export function lowerEnglishReg ( str: string, scope?: [ number, number ] ): boo
 
 export function englishNumberReg ( str: string, scope?: [ number, number ] ): boolean {
 
-    const reg = `^[A-Za-z0-9]{${ scope ? scope.join(','): '1,'}}$`;
+  const reg = `^[A-Za-z0-9]{${ scope ? scope.join ( ',' ) : '1,'}}$`;
 
-    return RegExp(reg, 'g').test ( str );
+  return RegExp ( reg, 'g' ).test ( str );
+
 }
 
 /**
@@ -76,9 +83,9 @@ export function englishNumberReg ( str: string, scope?: [ number, number ] ): bo
 
 export function enZhNumberReg ( str: string ): boolean {
 
-    const reg = `^[\\u4E00-\\u9FA5A-Za-z0-9_]+$`;
+  const reg = '^[\\u4E00-\\u9FA5A-Za-z0-9_]+$';
 
-    return RegExp(reg, 'g').test ( str );
+  return RegExp ( reg, 'g' ).test ( str );
 
 }
 
@@ -87,14 +94,14 @@ export function enZhNumberReg ( str: string ): boolean {
  * @description 所有格式字符，包含空白字符 默认最少1个，暂时不知道用于什么场景
  * @param { string } str 需要校验的字符串
  * @param { string } scope 可指定所有格式字符的长度范围，默认 1,
- * 
+ *
  * **/
 
 export function allStrReg ( str: string, scope?: [ number, number ] ): boolean {
 
-    const reg = `^.{${ scope ? scope.join(','): '1,' }}$`;
+  const reg = `^.{${ scope ? scope.join ( ',' ) : '1,' }}$`;
 
-    return RegExp(reg, 'gmi').test ( str );
+  return RegExp ( reg, 'gmi' ).test ( str );
 
 }
 
@@ -102,19 +109,20 @@ export function allStrReg ( str: string, scope?: [ number, number ] ): boolean {
  * 特殊字符校验
  * @description 特殊字符，包含空白字符 默认最少1个，暂时不知道用于什么场景
  * @param { string } str 需要校验的字符串
- * @param { string } scope 可指定特殊字符，默认 !@#$%^&*()_+-=[]{}|;':",./<>?  
- * 
+ * @param { string } scope 可指定特殊字符，默认 !@#$%^&*()_+-=[]{}|;':",./<>?
+ *
  * **/
 
 export function specialStrReg ( str: string, scope?: string ): boolean {
 
-    const defaultScope = `!@#$%^&*()_+-=[\\]{}|;':",\\./<>?`;
+  const defaultScope = '!@#$%^&*()_+-=[\\]{}|;\':",\\./<>?';
 
-    const reg = `^[${ scope || defaultScope }]+$`;
+  const reg = `^[${ scope || defaultScope }]+$`;
 
-    return RegExp(reg, 'gmi').test ( str );
+  return RegExp ( reg, 'gmi' ).test ( str );
 
 }
+
 /**
  * 自定义字符范围校验
  * @description 自定义字符范围校验，可以指定自定义字符范围及长度
@@ -125,8 +133,8 @@ export function specialStrReg ( str: string, scope?: string ): boolean {
 
 export function customStrReg ( str: string, reg: string, scope?: [ number, number ] ): boolean {
 
-    const regStr = `^[${ reg }]{${ scope ? scope.join(','): '1,' }}$`;
+  const regStr = `^[${ reg }]{${ scope ? scope.join ( ',' ) : '1,' }}$`;
 
-    return RegExp ( regStr, 'g').test ( str );
+  return RegExp ( regStr, 'g' ).test ( str );
 
 }

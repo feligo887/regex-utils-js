@@ -10,9 +10,10 @@ import { strictDecimalsReg, integerReg } from './number';
 
 export function generalEmailReg ( email: string, isHaveChinese?: boolean ): boolean {
 
-    const reg = `[${ isHaveChinese ? '\\u4e00-\\u9fa5' :''}a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$`;
+  const reg = `[${ isHaveChinese ? '\\u4e00-\\u9fa5' : ''}a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$`;
 
-    return RegExp ( reg, 'g') .test ( email );
+  return RegExp ( reg, 'g' ).test ( email );
+
 }
 
 /**
@@ -22,11 +23,12 @@ export function generalEmailReg ( email: string, isHaveChinese?: boolean ): bool
  * @param { `${number}-${number}` } scope 'min-max' 可指定手机号第二位的数字范围 默认为 3-9
  * @returns boolean
  * **/
-export function loosePhoneReg ( mobile: string, scope?:`${number}-${number}`  ): boolean {
 
-    const reg = `^[1][${ scope || '0-9' }]\\d{9}$`;
+export function loosePhoneReg ( mobile: string, scope?:`${number}-${number}` ): boolean {
 
-    return RegExp ( reg ).test ( mobile );
+  const reg = `^[1][${ scope || '0-9' }]\\d{9}$`;
+
+  return RegExp ( reg ).test ( mobile );
 
 }
 
@@ -38,13 +40,14 @@ export function loosePhoneReg ( mobile: string, scope?:`${number}-${number}`  ):
  * @returns boolean
  * **/
 
-export  function strictPhoneReg ( mobile: string, isArea?: boolean  ): boolean {
+export function strictPhoneReg ( mobile: string, isArea?: boolean ): boolean {
 
-    const reg = isArea ? /^(?:\+086|\+86)1([3456789])\d{9}$/ : /^1([3456789])\d{9}$/;
+  const reg = isArea ? /^(?:\+086|\+86)1([3456789])\d{9}$/ : /^1([3456789])\d{9}$/;
 
-    return reg.test ( mobile );
+  return reg.test ( mobile );
 
 }
+
 /**
  * 国内固定电话号码校验 0511-4405222、021-87888822
  * @description 固定电话号码(telephone number)中国, 只要是区号+号码(3+8、4+8)组成即可
@@ -55,9 +58,10 @@ export  function strictPhoneReg ( mobile: string, isArea?: boolean  ): boolean {
 
 export function chinaTelPhoneReg ( tel: string, isExtension?:boolean ): boolean {
 
-    const reg = !isExtension ? /^(0?\d{3})-\d{7,8}$/g : /^(0?\d{3})-(\d{7,8})-(\d{1,6})$/g;
+  const reg = !isExtension ? /^(0?\d{3})-\d{7,8}$/g : /^(0?\d{3})-(\d{7,8})-(\d{1,6})$/g;
 
-    return reg.test ( tel );
+  return reg.test ( tel );
+
 }
 
 /**
@@ -69,9 +73,10 @@ export function chinaTelPhoneReg ( tel: string, isExtension?:boolean ): boolean 
 
 export function telPhoneReg ( tel: string ): boolean {
 
-    const reg = '^(\\+|00)[1-9][0-9 \\-\\(\\)\\.]{7,32}$';
+  const reg = '^(\\+|00)[1-9][0-9 \\-\\(\\)\\.]{7,32}$';
 
-    return RegExp( reg, 'g').test ( tel );
+  return RegExp ( reg, 'g' ).test ( tel );
+
 }
 
 /**
@@ -83,7 +88,8 @@ export function telPhoneReg ( tel: string ): boolean {
 
 export function domainUrlReg ( str:string ):boolean {
 
-    return /^(?=^.{3,255}$)[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+$/gi.test ( str )
+  return /^(?=^.{3,255}$)[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+$/gi.test ( str );
+
 }
 
 /**
@@ -96,11 +102,12 @@ export function domainUrlReg ( str:string ):boolean {
 
 export function netWorkUrlReg ( str:string, agreement?: 'https' | 'http' ):boolean {
 
-    const agreementStr = agreement ? `^${ agreement }:` : 'http[s]{0,1}:';
+  const agreementStr = agreement ? `^${ agreement }:` : 'http[s]{0,1}:';
 
-    const reg = `${agreementStr}\\/\\/([\\w.]+\\/?)\\S*`;
+  const reg = `${agreementStr}\\/\\/([\\w.]+\\/?)\\S*`;
 
-    return RegExp(reg ).test ( str );
+  return RegExp ( reg ).test ( str );
+
 }
 
 /**
@@ -109,11 +116,13 @@ export function netWorkUrlReg ( str:string, agreement?: 'https' | 'http' ):boole
  * @param  { string } str 需要校验的字符串
  * @return boolean
  * **/
-export  function looseIdCardReg ( str:string ):boolean {
 
-    const reg = str.length === 15 ? '^\\d{15}$' : '^\\d{17}[0-9Xx]$';
+export function looseIdCardReg ( str:string ):boolean {
 
-    return  RegExp( reg ).test ( str );
+  const reg = str.length === 15 ? '^\\d{15}$' : '^\\d{17}[0-9Xx]$';
+
+  return RegExp ( reg ).test ( str );
+
 }
 
 /**
@@ -122,11 +131,13 @@ export  function looseIdCardReg ( str:string ):boolean {
  * @param  { string } str 需要校验的字符串
  * @return boolean
  * **/
-export  function strictIdCardReg ( str:string ):boolean {
 
-    const reg = /^\d{6}((((((19|20)\d{2})(0[13-9]|1[012])(0[1-9]|[12]\d|30))|(((19|20)\d{2})(0[13578]|1[02])31)|((19|20)\d{2})02(0[1-9]|1\d|2[0-8])|((((19|20)([13579][26]|[2468][048]|0[48]))|(2000))0229))\d{3})|((((\d{2})(0[13-9]|1[012])(0[1-9]|[12]\d|30))|((\d{2})(0[13578]|1[02])31)|((\d{2})02(0[1-9]|1\d|2[0-8]))|(([13579][26]|[2468][048]|0[048])0229))\d{2}))(\d|X|x)$/;
+export function strictIdCardReg ( str:string ):boolean {
 
-    return  RegExp( reg ).test ( str );
+  const reg = /^\d{6}((((((19|20)\d{2})(0[13-9]|1[012])(0[1-9]|[12]\d|30))|(((19|20)\d{2})(0[13578]|1[02])31)|((19|20)\d{2})02(0[1-9]|1\d|2[0-8])|((((19|20)([13579][26]|[2468][048]|0[48]))|(2000))0229))\d{3})|((((\d{2})(0[13-9]|1[012])(0[1-9]|[12]\d|30))|((\d{2})(0[13578]|1[02])31)|((\d{2})02(0[1-9]|1\d|2[0-8]))|(([13579][26]|[2468][048]|0[048])0229))\d{2}))(\d|X|x)$/;
+
+  return RegExp ( reg ).test ( str );
+
 }
 
 /**
@@ -139,9 +150,9 @@ export  function strictIdCardReg ( str:string ):boolean {
 
 export function passwordReg ( str: string, len?: [ number, number] ): boolean {
 
-    const reg = `^(?=.*[a-z])(?=.*[A-Z])(?=.*\\\d)(?=.*[!@#$&*\\\(\\\)_\\\-+=\\\[\\\]:;\\\?,.])[A-Za-z\\\d!@#$&*\\\(\\)_\\\-+=\\\[\\\]:;\\\?,.]{${len ? len.join(',') : '8,20'}}$`;
+  const reg = `^(?=.*[a-z])(?=.*[A-Z])(?=.*\\\d)(?=.*[!@#$&*\\\(\\\)_\\\-+=\\\[\\\]:;\\\?,.])[A-Za-z\\\d!@#$&*\\\(\\)_\\\-+=\\\[\\\]:;\\\?,.]{${len ? len.join ( ',' ) : '8,20'}}$`;
 
-    return RegExp(reg, 'g').test ( str );
+  return RegExp ( reg, 'g' ).test ( str );
 
 }
 
@@ -153,11 +164,11 @@ export function passwordReg ( str: string, len?: [ number, number] ): boolean {
  * **/
 
 
-export  function fieldNameReg ( str: string ): boolean {
+export function fieldNameReg ( str: string ): boolean {
 
-    const reg = /^[a-zA-Z0-9\d!@#$&*\(\)_\-+=\[\]:;\?,.]{1,30}$/;
+  const reg = /^[a-zA-Z0-9\d!@#$&*\(\)_\-+=\[\]:;\?,.]{1,30}$/;
 
-   return  reg.test ( str );
+  return reg.test ( str );
 
 }
 
@@ -170,9 +181,10 @@ export  function fieldNameReg ( str: string ): boolean {
 
 export function hexColorReg ( str: string ): boolean {
 
-    const reg = /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{3,6})$/;
+  const reg = /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{3,6})$/;
 
-    return  reg.test ( str );
+  return reg.test ( str );
+
 }
 
 
@@ -187,7 +199,7 @@ export function hexColorReg ( str: string ): boolean {
 
 export function moneyReg ( str: string, options?: { minus?: boolean, decimalsMax?: 2 } ): boolean {
 
-    return integerReg ( str, options?.minus ) || strictDecimalsReg ( str, options );
+  return integerReg ( str, options?.minus ) || strictDecimalsReg ( str, options );
 
 
 }
@@ -201,9 +213,10 @@ export function moneyReg ( str: string, options?: { minus?: boolean, decimalsMax
 
 export function thousandsMoneyReg ( str: string ): boolean {
 
-    const reg = `^([0-9]+|[0-9]{1,3}(,[0-9]{3})*)(.[0-9]{1,2})?$`
+  const reg = '^([0-9]+|[0-9]{1,3}(,[0-9]{3})*)(.[0-9]{1,2})?$';
 
-    return RegExp ( reg ).test ( str );
+  return RegExp ( reg ).test ( str );
+
 }
 
 /**
@@ -214,8 +227,8 @@ export function thousandsMoneyReg ( str: string ): boolean {
 
 export function ipReg ( str: string ): boolean {
 
-    const reg = /((?:(?:25[0-5]|2[0-4]\d|[01]?\d?\d)\.){3}(?:25[0-5]|2[0-4]\d|[01]?\d?\d))/
+  const reg = /((?:(?:25[0-5]|2[0-4]\d|[01]?\d?\d)\.){3}(?:25[0-5]|2[0-4]\d|[01]?\d?\d))/;
 
-    return  reg.test ( str );
+  return reg.test ( str );
 
 }
