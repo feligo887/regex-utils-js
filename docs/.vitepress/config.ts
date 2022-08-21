@@ -19,7 +19,7 @@ export default defineConfig ( {
 
   themeConfig: {
     nav: [
-      { text: '引导', link: '/guide/development-background', activeMatch: '/guide/' },
+      { text: '引导', link: '/guide/foreword', activeMatch: '/guide/' },
       { text: 'API', link: '/apis/', activeMatch: '/apis/' },
       { text: '更新日志', link: 'https://github.com/zguiyang/regex-utils-js' },
     ],
