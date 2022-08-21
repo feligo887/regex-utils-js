@@ -10,7 +10,7 @@ hero:
   actions:
     - theme: brand
       text: 快速开始
-      link: /guide/getting-started
+      link: /guide/foreword
     - theme: alt
       text: Github
       link: https://github.com/zguiyang/regex-utils-js
