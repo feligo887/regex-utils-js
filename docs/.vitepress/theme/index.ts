@@ -1,10 +1,10 @@
-import { Theme } from  'vitepress';
+import { Theme } from 'vitepress';
 
 import DefaultTheme from 'vitepress/theme';
 
 
 const theme: Theme = {
-    ...DefaultTheme,
-}
+  ...DefaultTheme,
+};
 
 export default theme;
