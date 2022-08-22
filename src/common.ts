@@ -96,7 +96,7 @@ export function domainUrlReg ( str:string ):boolean {
  *  网络地址正则校验
  * @description http or https 开头的链接
  * @param  { string } str 需要校验的字符串
- * @param  { https | http } agreement 可指定http或https
+ * @param  { 'https' | 'http' } agreement 可指定http或https
  * @return boolean
  */
 
