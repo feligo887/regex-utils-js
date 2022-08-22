@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 
 import { generalEmailReg, loosePhoneReg, strictPhoneReg, chinaTelPhoneReg, telPhoneReg, domainUrlReg, netWorkUrlReg,
-  looseIdCardReg, strictIdCardReg, passwordReg, fieldNameReg, hexColorReg, moneyReg, thousandsMoneyReg,
-  ipReg } from '../src';
+  looseIdCardReg, strictIdCardReg, loosePasswordReg, strictPasswordReg, fieldNameReg, hexColorReg, moneyReg, thousandsMoneyReg,
+  ipReg, dateReg, dateTimeReg } from '../src';
 
 describe ( '邮箱正则测试', () => {
 
@@ -314,27 +314,49 @@ describe ( '身份证号码校验正则测试', () => {
 
 } );
 
-describe ( '密码正则测试', () => {
+describe ( '弱密码正则测试', () => {
 
   it ( '密码长度测试', () => {
 
-    expect ( passwordReg ( 'x123X@' ) ).toBeFalsy ();
+    expect ( loosePasswordReg ( 'x123X@' ) ).toBeFalsy ();
 
-    expect ( passwordReg ( 'x123X@x123X@x123X@x123X@x123X@x123X@x123X@' ) ).toBeFalsy ();
+    expect ( loosePasswordReg ( '123xzfhgf' ) ).toBeTruthy ();
 
-    expect ( passwordReg ( '123@a!A', [ 7, 20 ] ) ).toBeTruthy ();
+    expect ( loosePasswordReg ( '123__aggA', [ 7, 20 ] ) ).toBeTruthy ();
 
   } );
 
   it ( '密码强度测试', () => {
 
-    expect ( passwordReg ( '123456' ) ).toBeFalsy ();
+    expect ( loosePasswordReg ( '123456', [ 6, 6 ] ) ).toBeTruthy ();
 
-    expect ( passwordReg ( '123x' ) ).toBeFalsy ();
+    expect ( loosePasswordReg ( '7ggHJJH_FHF_', [ 6, 20 ] ) ).toBeTruthy ();
 
-    expect ( passwordReg ( '123x!' ) ).toBeFalsy ();
+  } );
 
-    expect ( passwordReg ( '123x!Z@12' ) ).toBeTruthy ();
+} );
+
+describe ( '强密码正则测试', () => {
+
+  it ( '密码长度测试', () => {
+
+    expect ( strictPasswordReg ( 'x123X@' ) ).toBeFalsy ();
+
+    expect ( strictPasswordReg ( 'x123X@x123X@x123X@x123X@x123X@x123X@x123X@' ) ).toBeFalsy ();
+
+    expect ( strictPasswordReg ( '123@a!A', [ 7, 20 ] ) ).toBeTruthy ();
+
+  } );
+
+  it ( '密码强度测试', () => {
+
+    expect ( strictPasswordReg ( '123456' ) ).toBeFalsy ();
+
+    expect ( strictPasswordReg ( '123x' ) ).toBeFalsy ();
+
+    expect ( strictPasswordReg ( '123x!' ) ).toBeFalsy ();
+
+    expect ( strictPasswordReg ( '123x!Z@12' ) ).toBeTruthy ();
 
   } );
 
@@ -419,6 +441,42 @@ describe ( 'ip地址测试', () => {
     expect ( ipReg ( '127.0.0.1' ) ).toBeTruthy ();
 
     expect ( ipReg ( '192.168.10.1' ) ).toBeTruthy ();
+
+  } );
+
+} );
+
+describe ( '日期测试', () => {
+
+  it ( '日期格式测试', () => {
+
+    expect ( dateReg ( '2019-010-01' ) ).toBeFalsy ();
+
+    expect ( dateReg ( '2019--01' ) ).toBeFalsy ();
+
+    expect ( dateReg ( '2019-01-01' ) ).toBeTruthy ();
+
+    expect ( dateReg ( '2019-1-1' ) ).toBeTruthy ();
+
+    expect ( dateReg ( '2019-01-1' ) ).toBeTruthy ();
+
+  } );
+
+  it ( '日期时间格式测试', () => {
+
+    expect ( dateTimeReg ( '2019-02-01' ) ).toBeFalsy ();
+
+    expect ( dateTimeReg ( '2019-01-0110:00:00' ) ).toBeFalsy ();
+
+    expect ( dateTimeReg ( '2019-04-01 110:00:00' ) ).toBeFalsy ();
+
+    expect ( dateTimeReg ( '2019-06-01 10::00:00' ) ).toBeFalsy ();
+
+    expect ( dateTimeReg ( '2019-08-01 10:00:00' ) ).toBeTruthy ();
+
+    expect ( dateTimeReg ( '2019-10-01 1:0:0' ) ).toBeTruthy ();
+
+    expect ( dateTimeReg ( '2019-1-1 1:0:0' ) ).toBeTruthy ();
 
   } );
 

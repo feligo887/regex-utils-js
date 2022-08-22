@@ -141,14 +141,30 @@ export function strictIdCardReg ( str:string ):boolean {
 }
 
 /**
- * 密码正则校验
+ * 简单密码校验
+ @description 密码规则:密码长度为m ~ n个字符，只能包含数字、大写字母、小写字母和下划线组成(有其一即可)
+ @param { string } str
+ @param { [ number, number ] } len [ min, max ] 密码长度范围, 默认 6-15
+ @return boolean
+ * **/
+
+export function loosePasswordReg ( str:string, len?: [ number, number ] ):boolean {
+
+  const reg = `^[0-9a-zA-Z_]{${ len ? len.join ( ',' ) : '6,15'}}$`;
+
+  return RegExp ( reg, 'g' ).test ( str );
+
+}
+
+/**
+ * 强密码正则校验
  * @description 密码规则:密码长度为8 ~ 20个字符，由数字、大写字母、小写字母和特殊字符组成, 默认8-20位字符
  * @param { string } str
  * @param { [ number, number ] } len [ min, max ] 密码长度范围
  * @return boolean
  * **/
 
-export function passwordReg ( str: string, len?: [ number, number] ): boolean {
+export function strictPasswordReg ( str: string, len?: [ number, number] ): boolean {
 
   const reg = `^(?=.*[a-z])(?=.*[A-Z])(?=.*\\\d)(?=.*[!@#$&*\\\(\\\)_\\\-+=\\\[\\\]:;\\\?,.])[A-Za-z\\\d!@#$&*\\\(\\)_\\\-+=\\\[\\\]:;\\\?,.]{${len ? len.join ( ',' ) : '8,20'}}$`;
 
@@ -230,5 +246,35 @@ export function ipReg ( str: string ): boolean {
   const reg = /((?:(?:25[0-5]|2[0-4]\d|[01]?\d?\d)\.){3}(?:25[0-5]|2[0-4]\d|[01]?\d?\d))/;
 
   return reg.test ( str );
+
+}
+
+/**
+ * 日期格式正则校验
+ * @description 校验日期格式 2020-01-01、2020-1-1
+ * param { string } str 需要校验的字符串
+ * @return boolean
+ * **/
+
+export function dateReg ( str: string ): boolean {
+
+  const reg = '^\\d{4}-\\d{1,2}-\\d{1,2}';
+
+  return RegExp ( reg, 'g' ).test ( str );
+
+}
+
+/**
+ * 日期时间格式正则校验
+ * @description 校验日期格式 2020-01-01、2020-1-1
+ * param { string } str 需要校验的字符串
+ * @return boolean
+ * **/
+
+export function dateTimeReg ( str: string ): boolean {
+
+  const reg = '^\\d{4}-\\d{1,2}-\\d{1,2}\\s\\d{1,2}:\\d{1,2}:\\d{1,2}';
+
+  return RegExp ( reg, 'g' ).test ( str );
 
 }
