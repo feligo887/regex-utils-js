@@ -17,7 +17,9 @@ export default defineConfig ( {
   //     },
   // },
 
+  lastUpdated: true,
   themeConfig: {
+    lastUpdatedText: '上次更新',
     nav: [
       { text: '引导', link: '/guide/foreword', activeMatch: '/guide/' },
       { text: '更新日志', link: 'https://github.com/zguiyang/regex-utils-js' },
