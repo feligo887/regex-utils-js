@@ -543,7 +543,7 @@ packages:
       '@vueuse/shared': 9.1.0_vue@3.2.37
       vue-demi: 0.13.8_vue@3.2.37
     transitivePeerDependencies:
-      - '@vue/composition-api'
+      - '@vue/composition-apis'
       - vue
     dev: true
 
@@ -556,7 +556,7 @@ packages:
     dependencies:
       vue-demi: 0.13.8_vue@3.2.37
     transitivePeerDependencies:
-      - '@vue/composition-api'
+      - '@vue/composition-apis'
       - vue
     dev: true
 
@@ -2512,7 +2512,7 @@ packages:
     transitivePeerDependencies:
       - '@algolia/client-search'
       - '@types/react'
-      - '@vue/composition-api'
+      - '@vue/composition-apis'
       - less
       - react
       - react-dom
