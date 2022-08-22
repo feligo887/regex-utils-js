@@ -124,7 +124,7 @@ describe ( '严格手机号码校验测试', () => {
 
     expect ( strictPhoneReg ( '1598698709' ) ).toBeFalsy ();
 
-    expect ( strictPhoneReg ( '18190678380' ) ).toBeTruthy ();
+    expect ( strictPhoneReg ( '18190678381' ) ).toBeTruthy ();
 
   } );
 
