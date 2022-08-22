@@ -20,7 +20,7 @@ export function generalEmailReg ( email: string, isHaveChinese?: boolean ): bool
  * 宽松手机号校验
  * @description 手机号(mobile phone)中国(宽松), 只要是13,14,15,16,17,18,19开头即可
  * @param { string } mobile 手机号
- * @param { `${number}-${number}` } scope 'min-max' 可指定手机号第二位的数字范围 默认为 3-9
+ * @param { `${number}-${number}` } scope 'min-max' 可指定手机号第二位的数字范围 默认为 0-9
  * @returns boolean
  * **/
 
