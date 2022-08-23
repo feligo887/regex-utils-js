@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import { generalEmailReg, loosePhoneReg, strictPhoneReg, chinaTelPhoneReg, telPhoneReg, domainUrlReg, netWorkUrlReg,
-  looseIdCardReg, strictIdCardReg, loosePasswordReg, strictPasswordReg, fieldNameReg, hexColorReg, moneyReg, thousandsMoneyReg,
+  looseIdCardReg, strictIdCardReg, loosePasswordReg, simplePasswordReg, strictPasswordReg, fieldNameReg, hexColorReg, moneyReg, thousandsMoneyReg,
   ipReg, dateReg, dateTimeReg } from '../src';
 
 describe ( '邮箱正则测试', () => {
@@ -331,6 +331,28 @@ describe ( '弱密码正则测试', () => {
     expect ( loosePasswordReg ( '123456', [ 6, 6 ] ) ).toBeTruthy ();
 
     expect ( loosePasswordReg ( '7ggHJJH_FHF_', [ 6, 20 ] ) ).toBeTruthy ();
+
+  } );
+
+} );
+
+describe ( '简单密码正则测试', () => {
+
+  it ( '密码长度测试', () => {
+
+    expect ( simplePasswordReg ( '123!@' ) ).toBeFalsy ();
+
+    expect ( simplePasswordReg ( '123xzfhgf' ) ).toBeTruthy ();
+
+    expect ( simplePasswordReg ( '123!_aggA', [ 7, 20 ] ) ).toBeTruthy ();
+
+  } );
+
+  it ( '密码强度测试', () => {
+
+    expect ( simplePasswordReg ( '123456', [ 6, 6 ] ) ).toBeFalsy ();
+
+    expect ( simplePasswordReg ( '7ggHJJH_FHF@~####', [ 12, 20 ] ) ).toBeTruthy ();
 
   } );
 

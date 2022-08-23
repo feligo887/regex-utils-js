@@ -157,6 +157,26 @@ export function loosePasswordReg ( str:string, len?: [ number, number ] ):boolea
 }
 
 /**
+ * 简单密码校验
+ @description 密码规则:密码长度为m ~ n个字符，必须包含数字和字母（大小写均可），允许除空格外的特殊符号
+ @param { string } str
+ @param { [ number, number ] } len [ min, max ] 密码长度范围, 默认 6-20
+ @return boolean
+ * **/
+
+export function simplePasswordReg ( str: string, len?: [ number, number ] ): boolean {
+
+  const reg = `^(?=.*[0-9].*)(?=.*[A-Z].*)(?=.*[a-z].*)(?!.*\\s).{${ len ? len.join ( ',' ) : '6,20' }}$`;
+
+  console.log ( RegExp ( reg, 'g' ), str );
+
+  return RegExp ( reg, 'g' ).test ( str );
+
+}
+
+
+
+/**
  * 强密码正则校验
  * @description 密码规则:密码长度为8 ~ 20个字符，由数字、大写字母、小写字母和特殊字符组成, 默认8-20位字符
  * @param { string } str
