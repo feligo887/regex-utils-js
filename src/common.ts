@@ -141,7 +141,7 @@ export function strictIdCardReg ( str:string ):boolean {
 }
 
 /**
- * 简单密码校验
+ * 弱密码校验
  @description 密码规则:密码长度为m ~ n个字符，只能包含数字、大写字母、小写字母和下划线组成(有其一即可)
  @param { string } str
  @param { [ number, number ] } len [ min, max ] 密码长度范围, 默认 6-15
