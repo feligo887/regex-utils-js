@@ -69,7 +69,7 @@ export function chinaTelPhoneReg ( tel: string, isExtension?: boolean ): boolean
 /**
  * 固定电话号码校验
  * 固定电话号码校验 "XXX-XXXXXXX"、"XXXX-XXXXXXXX"、"XXX-XXXXXXX"、"XXX-XXXXXXXX"、"XXXXXXX"和"XXXXXXXX
- * @description 固定电话号码(telephone number)中国, 只要是区号+号码(3+8、4+8)组成即可
+ * @description 国际固定电话号码校验
  * @param { string } tel 固定电话号码
  * @return boolean
  * **/
