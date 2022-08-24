@@ -194,6 +194,8 @@ describe ( '国内固定电话号码测试', () => {
 
     expect ( chinaTelPhoneReg ( '028-78989779-123', true ) ).toBeTruthy ();
 
+    expect ( chinaTelPhoneReg ( '028-78989779', true ) ).toBeTruthy ();
+
     expect ( chinaTelPhoneReg ( '0280-78989779-5687', true ) ).toBeTruthy ();
 
     expect ( chinaTelPhoneReg ( '028-9867876-898800', true ) ).toBeTruthy ();
