@@ -49,22 +49,25 @@ export function strictPhoneReg ( mobile: string, isArea?: boolean ): boolean {
 }
 
 /**
- * 国内固定电话号码校验 0511-4405222、021-87888822
- * @description 固定电话号码(telephone number)中国, 只要是区号+号码(3+8、4+8)组成即可
+ * 国内固定电话号码校验 051-4405222、0211-87888822
+ * @description 固定电话号码(telephone number)中国, 只要是区号+号码(3+{7,8}、4+{7,8})组成即可
  * @param { string } tel 固定电话号码
  * @param { boolean } isExtension 是否需要分机号码
  * @return boolean
  * **/
 
-export function chinaTelPhoneReg ( tel: string, isExtension?:boolean ): boolean {
+export function chinaTelPhoneReg ( tel: string, isExtension?: boolean ): boolean {
 
   const reg = !isExtension ? /^(0?\d{3})-\d{7,8}$/g : /^(0?\d{3})-(\d{7,8})-(\d{1,6})$/g;
 
-  return reg.test ( tel );
+  // const reg = /\(0?\d{2}\)-?\d{8}$|0?\d{2}-?\d{8}$|0?\d{3}-?\d{8}$/;
+
+  return RegExp ( reg ).test ( tel );
 
 }
 
 /**
+ * 固定电话号码校验
  * 固定电话号码校验 "XXX-XXXXXXX"、"XXXX-XXXXXXXX"、"XXX-XXXXXXX"、"XXX-XXXXXXXX"、"XXXXXXX"和"XXXXXXXX
  * @description 固定电话号码(telephone number)中国, 只要是区号+号码(3+8、4+8)组成即可
  * @param { string } tel 固定电话号码
@@ -160,15 +163,13 @@ export function loosePasswordReg ( str:string, len?: [ number, number ] ):boolea
  * 简单密码校验
  @description 密码规则:密码长度为m ~ n个字符，必须包含数字和字母（大小写均可），允许除空格外的特殊符号
  @param { string } str
- @param { [ number, number ] } len [ min, max ] 密码长度范围, 默认 6-20
+ @param { [ number, number ] } len [ min, max ] 密码长度范围, 默认 6-15
  @return boolean
  * **/
 
 export function simplePasswordReg ( str: string, len?: [ number, number ] ): boolean {
 
-  const reg = `^(?=.*[0-9].*)(?=.*[A-Z].*)(?=.*[a-z].*)(?!.*\\s).{${ len ? len.join ( ',' ) : '6,20' }}$`;
-
-  console.log ( RegExp ( reg, 'g' ), str );
+  const reg = `^(?=.*[0-9].*)(?=.*[A-Za-z].*)[^\\s]{${len ? len.join ( ',' ) : '6,15'}}$`;
 
   return RegExp ( reg, 'g' ).test ( str );
 
@@ -242,6 +243,7 @@ export function moneyReg ( str: string, options?: { minus?: boolean, decimalsMax
 
 
 /**
+ * 千分位正则
  * @description 千分位正则校验 10,000.00 100,000,000 199999
  * @param { string } str 需要校验的字符串
  *@return boolean

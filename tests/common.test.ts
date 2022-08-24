@@ -146,7 +146,7 @@ describe ( '国内固定电话号码测试', () => {
 
   it ( '固定电话号码格式测试:', () => {
 
-    expect ( chinaTelPhoneReg ( '04098786544' ) ).toBeFalsy ();
+    expect ( chinaTelPhoneReg ( '040123456' ) ).toBeFalsy ();
 
     expect ( chinaTelPhoneReg ( '+442912345678' ) ).toBeFalsy ();
 
@@ -463,6 +463,8 @@ describe ( 'ip地址测试', () => {
     expect ( ipReg ( '127.0.0.1' ) ).toBeTruthy ();
 
     expect ( ipReg ( '192.168.10.1' ) ).toBeTruthy ();
+
+    expect ( ipReg ( '255.22.255.255' ) ).toBeTruthy ();
 
   } );
 
