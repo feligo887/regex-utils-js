@@ -78,7 +78,7 @@ loosePhoneReg ( '13313567890' ) // true
 - 参数说明
 
 1. `mobile`需要校验的手机号
-2. `isArea`是否加上区号验证，默认为`false`
+2. `isArea`是否支持区号验证，默认为`false`
 
 - 示例
 
@@ -90,4 +90,67 @@ strictPhoneReg ( '18190678381' ) // true
 strictPhoneReg ( '+08613898786754', true ) // true
 
 strictPhoneReg ( '+8615898786754', true ) // true
+```
+
+## 电话号码校验（中国）
+
+- 描述
+
+国内固定电话号码校验，如： `028-4405222`、`0816-87888822`
+
+- Type
+
+```ts
+  type  chinaTelPhoneReg = ( tel: string, isExtension?: boolean ) => boolean
+```
+
+- 参数说明
+
+1. `tel`需要校验的电话号码
+2. `isExtension`是否加上分机号校验，默认为`false`, 设置为`true`仅代表支持分机号校验，不代表分机号必填
+
+- 示例
+
+```js
+import { chinaTelPhoneReg } from 'regex-utils-js';
+
+chinaTelPhoneReg ( '028-98678766' ) // true
+
+chinaTelPhoneReg ( '4000-98678766' ) // true
+
+chinaTelPhoneReg ( '028-9987-898800', true ) // true
+
+chinaTelPhoneReg ( '0816-78989779-5687', true ) // true
+```
+
+## 电话号码校验（国际）
+
+- 描述
+
+国际固定电话号码校验，如：`XXX-XXXXXXX`、`XXXX-XXXXXXXX`、`XXX-XXXXXXX`、`XXX-XXXXXXXX`、`XXXXXXX`、`XXXXXXXX`
+
+- Type
+
+```ts
+  type  telPhoneReg = ( tel: string ) => boolean
+```
+
+- 参数说明
+
+1. `tel`需要校验的电话号码
+
+- 示例
+
+```js
+import { telPhoneReg } from 'regex-utils-js';
+
+telPhoneReg ( '+442912345678' ) // true
+
+telPhoneReg ( '+14255550100' ) // true
+
+telPhoneReg ( '+14255550100' ) // true
+
+telPhoneReg ( '0019898777' ) // true
+
+telPhoneReg ( '+186-22212148' ) // true
 ```
