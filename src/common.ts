@@ -42,9 +42,9 @@ export function loosePhoneReg ( mobile: string, scope?:`${number}-${number}` ): 
 
 export function strictPhoneReg ( mobile: string, isArea?: boolean ): boolean {
 
-  const reg = isArea ? /^(?:\+086|\+86)1([3456789])\d{9}$/ : /^1([3456789])\d{9}$/;
+  const reg = `^${ isArea ? '(?:\\+086|\\+86)' : '' }1([3456789])\\d{9}$`;
 
-  return reg.test ( mobile );
+  return RegExp ( reg ).test ( mobile );
 
 }
 
@@ -58,7 +58,7 @@ export function strictPhoneReg ( mobile: string, isArea?: boolean ): boolean {
 
 export function chinaTelPhoneReg ( tel: string, isExtension?: boolean ): boolean {
 
-  const reg = !isExtension ? /^(0?\d{3})-\d{7,8}$/g : /^(0?\d{3})-(\d{7,8})-(\d{1,6})$/g;
+  const reg = !isExtension ? /^(0?\d{3})-\d{7,8}$/g : /^(0?\d{3})-(\d{7,8})(-\d{1,6})?$/g;
 
   // const reg = /\(0?\d{2}\)-?\d{8}$|0?\d{2}-?\d{8}$|0?\d{3}-?\d{8}$/;
 
