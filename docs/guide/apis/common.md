@@ -154,3 +154,219 @@ telPhoneReg ( '0019898777' ) // true
 
 telPhoneReg ( '+186-22212148' ) // true
 ```
+
+## 域名正则校验
+
+- 描述
+
+一级或二级域名校验，`www.baidu.com`、 `test.baidu.com`, 不能以http[s]开头
+
+- Type
+
+```ts
+  type  domainUrlReg = ( str: string ) => boolean
+```
+
+- 参数说明
+
+1. `str`需要校验的域名地址
+
+
+
+- 示例
+
+```js
+import { domainUrlReg } from 'regex-utils-js';
+
+domainUrlReg ( 'www.baidu.com' ) // true
+
+domainUrlReg ( 'a.com.cn' ) // true
+
+```
+
+## 网路地址校验
+
+- 描述
+
+http or https 开头的网路链接
+
+- Type
+
+```ts
+  type  netWorkUrlReg = ( str:string, agreement?: 'https' | 'http' ) => boolean
+```
+
+- 参数说明
+
+1. `str`需要校验的链接
+2. `agreement` 网络协议，默认两种都支持
+
+
+- 示例
+
+```js
+import { netWorkUrlReg } from 'regex-utils-js';
+
+domainUrlReg ( 'http://www.baidu.com' ) // true
+
+domainUrlReg ( 'https://www.baidu.com' ) // true
+
+domainUrlReg ( 'https://www.baidu.com', 'http' ) // false
+
+```
+
+## 身份证号码校验(宽松)
+
+- 描述
+
+校验身份证号码，15或18位即可，支持最后一个字符为`x`
+
+- Type
+
+```ts
+  type  looseIdCardReg = ( str:string ) => boolean
+```
+
+- 参数说明
+
+1. `str`需要校验的身份证号码
+
+- 示例
+
+```js
+import { looseIdCardReg } from 'regex-utils-js';
+
+looseIdCardReg ( '123456789012345' ) // true
+
+looseIdCardReg ( '51072519970228741X' ) // true
+
+looseIdCardReg ( '51072519970228741x' ) // true
+
+```
+
+## 身份证号码校验(严格)
+
+- 描述
+
+校验身份证号码，15或18位都支持，不过是严格校验的版本
+
+- Type
+
+```ts
+  type  strictIdCardReg = ( str:string ) => boolean
+```
+
+- 参数说明
+
+1. `str`需要校验的身份证号码
+
+- 示例
+
+```js
+import { strictIdCardReg } from 'regex-utils-js';
+
+strictIdCardReg ( '123456789012345' ) // false
+
+strictIdCardReg ( '110225196403026127' ) // true
+
+strictIdCardReg ( '51072519970224741X' ) // true
+
+```
+
+ ## 弱密码格式正则校验
+
+- 描述
+
+密码规则:密码长度为m ~ n个字符，只能包含数字、大写字母、小写字母和下划线组成(有其一即可)
+
+- Type
+
+```ts
+  type  loosePasswordReg = ( str:string, len?: [ number, number ] ) => boolean
+```
+
+- 参数说明
+
+1. `str`需要校验的密码
+2. `len` `[ min, max ]` 密码长度范围, 默认 `6-15`
+
+- 示例
+
+```js
+import { loosePasswordReg } from 'regex-utils-js';
+
+loosePasswordReg ( '123456' ) // true
+
+loosePasswordReg ( '7ggHJJH_FHF_' ) // true
+
+loosePasswordReg ( '12aaAB', [ 6, 6 ] ) // true
+
+```
+
+## 简单密码格式正则校验
+
+- 描述
+
+密码规则:密码规则:密码长度为m ~ n个字符，必须包含数字和字母（大小写均可），允许除空格外的特殊符号(可选)
+
+- Type
+
+```ts
+  type  simplePasswordReg = ( str:string, len?: [ number, number ] ) => boolean
+```
+
+- 参数说明
+
+1. `str`需要校验的密码
+2. `len` `[ min, max ]` 密码长度范围, 默认 `6-15`
+
+- 示例
+
+```js
+import { simplePasswordReg } from 'regex-utils-js';
+
+loosePasswordReg ( '123456' ) // false
+
+loosePasswordReg ( '12345!@' ) // false
+
+simplePasswordReg ( '123xzfhgf' ) // true
+
+loosePasswordReg ( '7ggHJJH_FHF_' ) // true
+
+loosePasswordReg ( '7ggHJJH_FHF@~####' ) // true
+
+```
+
+## 强密码格式正则校验
+
+- 描述
+
+密码规则:密码规则:密码长度为8 ~ 20个字符，由数字、大写字母、小写字母和特殊字符组成, 默认`8-20`位字符
+
+> 特殊符号： !@#$&*( 、) _、-+=、[、]:;?,.
+
+- Type
+
+```ts
+  type  strictPasswordReg = ( str:string, len?: [ number, number ] ) => boolean
+```
+
+- 参数说明
+
+1. `str`需要校验的密码
+2. `len` `[ min, max ]` 密码长度范围, 默认 `8-20`
+
+- 示例
+
+```js
+import { strictPasswordReg } from 'regex-utils-js';
+
+strictPasswordReg ( '190808098456' ) // false
+
+strictPasswordReg ( '123jhjhx' ) // false
+
+strictPasswordReg ( '123vhvhx!@' ) // true
+
+strictPasswordReg ( '123x!Z@12' ) // true
+
+```
