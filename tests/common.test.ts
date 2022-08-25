@@ -286,17 +286,11 @@ describe ( '身份证号码校验正则测试', () => {
 
     expect ( looseIdCardReg ( '110225196403026127' ) ).toBeTruthy ();
 
-    expect ( looseIdCardReg ( '110223790813697' ) ).toBeTruthy ();
+    expect ( looseIdCardReg ( '222223790813697' ) ).toBeTruthy ();
 
     expect ( looseIdCardReg ( '123456789012345' ) ).toBeTruthy ();
 
-    expect ( looseIdCardReg ( '510711199102318970' ) ).toBeTruthy ();
-
-    expect ( looseIdCardReg ( '51072519970228741x' ) ).toBeTruthy ();
-
-    expect ( looseIdCardReg ( '51072519970228741X' ) ).toBeTruthy ();
-
-    expect ( looseIdCardReg ( '510725199702277419' ) ).toBeTruthy ();
+    expect ( looseIdCardReg ( '111711199102318970' ) ).toBeTruthy ();
 
   } );
 
@@ -306,11 +300,15 @@ describe ( '身份证号码校验正则测试', () => {
 
     expect ( strictIdCardReg ( '12345678901234512x' ) ).toBeFalsy ();
 
-    expect ( strictIdCardReg ( '510711199102318970' ) ).toBeFalsy ();
-
-    expect ( strictIdCardReg ( '110223790813697' ) ).toBeTruthy ();
+    expect ( strictIdCardReg ( '123456789012345' ) ).toBeFalsy ();
 
     expect ( strictIdCardReg ( '110225196403026127' ) ).toBeTruthy ();
+
+    expect ( strictIdCardReg ( '51072519970228741x' ) ).toBeTruthy ();
+
+    expect ( strictIdCardReg ( '51072519970224741X' ) ).toBeTruthy ();
+
+    expect ( strictIdCardReg ( '510725199702277419' ) ).toBeTruthy ();
 
   } );
 
@@ -318,19 +316,11 @@ describe ( '身份证号码校验正则测试', () => {
 
 describe ( '弱密码正则测试', () => {
 
-  it ( '密码长度测试', () => {
-
-    expect ( loosePasswordReg ( 'x123X@' ) ).toBeFalsy ();
-
-    expect ( loosePasswordReg ( '123xzfhgf' ) ).toBeTruthy ();
-
-    expect ( loosePasswordReg ( '123__aggA', [ 7, 20 ] ) ).toBeTruthy ();
-
-  } );
-
   it ( '密码强度测试', () => {
 
     expect ( loosePasswordReg ( '123456', [ 6, 6 ] ) ).toBeTruthy ();
+
+    expect ( loosePasswordReg ( '12aaAB', [ 6, 6 ] ) ).toBeTruthy ();
 
     expect ( loosePasswordReg ( '7ggHJJH_FHF_', [ 6, 20 ] ) ).toBeTruthy ();
 
@@ -340,17 +330,11 @@ describe ( '弱密码正则测试', () => {
 
 describe ( '简单密码正则测试', () => {
 
-  it ( '密码长度测试', () => {
+  it ( '密码强度测试', () => {
 
-    expect ( simplePasswordReg ( '123!@' ) ).toBeFalsy ();
+    expect ( simplePasswordReg ( '12345!@' ) ).toBeFalsy ();
 
     expect ( simplePasswordReg ( '123xzfhgf' ) ).toBeTruthy ();
-
-    expect ( simplePasswordReg ( '123!_aggA', [ 7, 20 ] ) ).toBeTruthy ();
-
-  } );
-
-  it ( '密码强度测试', () => {
 
     expect ( simplePasswordReg ( '123456', [ 6, 6 ] ) ).toBeFalsy ();
 
@@ -374,11 +358,11 @@ describe ( '强密码正则测试', () => {
 
   it ( '密码强度测试', () => {
 
-    expect ( strictPasswordReg ( '123456' ) ).toBeFalsy ();
+    expect ( strictPasswordReg ( '190808098456' ) ).toBeFalsy ();
 
-    expect ( strictPasswordReg ( '123x' ) ).toBeFalsy ();
+    expect ( strictPasswordReg ( '123jhjhx' ) ).toBeFalsy ();
 
-    expect ( strictPasswordReg ( '123x!' ) ).toBeFalsy ();
+    expect ( strictPasswordReg ( '123vhvhx!@' ) ).toBeFalsy ();
 
     expect ( strictPasswordReg ( '123x!Z@12' ) ).toBeTruthy ();
 
