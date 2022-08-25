@@ -83,8 +83,8 @@ export function telPhoneReg ( tel: string ): boolean {
 }
 
 /**
- *  域名正则校验
- * @description  url validate www.baidu.com https://www.baidu.com
+ *  域名正则校验(一级或二级域名)
+ * @description  url validate www.baidu.com test.baidu.com
  * @param  { string } str 需要校验的字符串
  * @return boolean
  */
@@ -107,7 +107,7 @@ export function netWorkUrlReg ( str:string, agreement?: 'https' | 'http' ):boole
 
   const agreementStr = agreement ? `^${ agreement }:` : 'http[s]{0,1}:';
 
-  const reg = `${agreementStr}\\/\\/([\\w.]+\\/?)\\S*`;
+  const reg = `^${agreementStr}\\/\\/([\\w.]+\\/?)\\S*`;
 
   return RegExp ( reg ).test ( str );
 
