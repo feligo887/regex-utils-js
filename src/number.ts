@@ -1,12 +1,12 @@
 /**
- * 检查数字精度，整数大于0，小数点最高可达8位19.8n精度
+ * 大数输入值验证，整数大于0，小数点最高可达8位19.8n精度(特定场景使用)
  *@param { string } str 需要检查的字符串
  * @return { boolean } 是否符合精度要求
  * **/
 
-export function numberOrFloatReg ( str: string ): boolean {
+export function largeNumberReg ( str: string ): boolean {
 
-  const reg = /^[1-9]+([.]{1}[0-9]{1,8})?$/;
+  const reg = /^[1-9]{1,19}([.]([0-9]{1,8}))?$/;
 
   return reg.test ( str );
 

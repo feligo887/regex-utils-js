@@ -1,24 +1,26 @@
 import { describe, expect, it } from 'vitest';
 
-import { numberOrFloatReg, integerReg, strictDecimalsReg, looseDecimalsReg } from '../src';
+import { largeNumberReg, integerReg, strictDecimalsReg, looseDecimalsReg } from '../src';
 
 describe ( '金额正则测试', () => {
 
-  it ( '19.8n正数金额测试', () => {
+  it ( '19.8n整数金额测试', () => {
 
-    expect ( numberOrFloatReg ( '0.' ) ).toBeFalsy ();
+    expect ( largeNumberReg ( '0.' ) ).toBeFalsy ();
 
-    expect ( numberOrFloatReg ( '12.' ) ).toBeFalsy ();
+    expect ( largeNumberReg ( '12.' ) ).toBeFalsy ();
 
-    expect ( numberOrFloatReg ( '0.8' ) ).toBeFalsy ();
+    expect ( largeNumberReg ( '0.8' ) ).toBeFalsy ();
 
-    expect ( numberOrFloatReg ( '0..8' ) ).toBeFalsy ();
+    expect ( largeNumberReg ( '0..8' ) ).toBeFalsy ();
 
-    expect ( numberOrFloatReg ( '111.888888888' ) ).toBeFalsy ();
+    expect ( largeNumberReg ( '111.888888888' ) ).toBeFalsy ();
 
-    expect ( numberOrFloatReg ( '111.88888888' ) ).toBeTruthy ();
+    expect ( largeNumberReg ( '1111111111111111111111111111111111111111.88888888' ) ).toBeFalsy ();
 
-    expect ( numberOrFloatReg ( '19.8' ) ).toBeTruthy ();
+    expect ( largeNumberReg ( '111.88888888' ) ).toBeTruthy ();
+
+    expect ( largeNumberReg ( '1999999999999999999.88888888' ) ).toBeTruthy ();
 
   } );
 
