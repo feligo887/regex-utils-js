@@ -205,7 +205,7 @@ export function strictPasswordReg ( str: string, len?: [ number, number] ): bool
 
 export function fieldNameReg ( str: string ): boolean {
 
-  return chineseReg ( str ) || letterNumberReg ( str ) || letterZhNumberReg ( str );
+  return chineseReg ( str, 30 ) || letterNumberReg ( str, 30 ) || letterZhNumberReg ( str, 30 );
 
 }
 
