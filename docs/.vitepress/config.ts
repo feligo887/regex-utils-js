@@ -66,5 +66,10 @@ export default defineConfig ( {
       pattern: 'https://github.com/zguiyang/regex-utils-js/tree/main/docs/:path',
       text: '编辑此页',
     },
+    algolia: {
+      appId: '4LY2812SKV',
+      apiKey: '9fb1d7b3733b997d46e2c90bc2714e5e',
+      indexName: 'docs_vitepress',
+    },
   },
 } );
