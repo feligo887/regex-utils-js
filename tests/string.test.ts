@@ -23,11 +23,11 @@ describe ( '中文字符正则测试', () => {
 
   it ( '中文字符长度范围测试', () => {
 
-    expect ( chineseReg ( '1234', [ 1, 2 ] ) ).toBeFalsy ();
+    expect ( chineseReg ( '1234', 2 ) ).toBeFalsy ();
 
-    expect ( chineseReg ( '中文三', [ 2, 2 ] ) ).toBeFalsy ();
+    expect ( chineseReg ( '中文三', 2 ) ).toBeFalsy ();
 
-    expect ( chineseReg ( '', [ 0, 2 ] ) ).toBeTruthy ();
+    expect ( chineseReg ( '张三李', 3 ) ).toBeTruthy ();
 
   } );
 
@@ -51,7 +51,7 @@ describe ( '英文字符正则测试', () => {
 
     expect ( letterReg ( 'ADSDS' ) ).toBeTruthy ();
 
-    expect ( letterReg ( 'zhangsanADSDS' ) ).toBeTruthy ();
+    expect ( letterReg ( 'zhangsanADSDS', 20 ) ).toBeTruthy ();
 
   } );
 
@@ -61,11 +61,11 @@ describe ( '英文字符正则测试', () => {
 
     expect ( upperLetterReg ( 'jjj' ) ).toBeFalsy ();
 
-    expect ( upperLetterReg ( 'GJHGJGH', [ 1, 3 ] ) ).toBeFalsy ();
+    expect ( upperLetterReg ( 'GJHGJGH', 3 ) ).toBeFalsy ();
 
     expect ( upperLetterReg ( 'GJHGJGH' ) ).toBeTruthy ();
 
-    expect ( upperLetterReg ( 'HH', [ 1, 2 ] ) ).toBeTruthy ();
+    expect ( upperLetterReg ( 'HH', 2 ) ).toBeTruthy ();
 
   } );
 
@@ -75,21 +75,21 @@ describe ( '英文字符正则测试', () => {
 
     expect ( lowerLetterReg ( 'ggHH' ) ).toBeFalsy ();
 
-    expect ( lowerLetterReg ( 'gggg', [ 1, 1 ] ) ).toBeFalsy ();
+    expect ( lowerLetterReg ( 'gggg', 1 ) ).toBeFalsy ();
 
-    expect ( lowerLetterReg ( 'gggg' ) ).toBeTruthy ();
+    expect ( lowerLetterReg ( 'gggg', 4 ) ).toBeTruthy ();
 
-    expect ( lowerLetterReg ( 'gggg', [ 4, 4 ] ) ).toBeTruthy ();
+    expect ( lowerLetterReg ( 'gggg', 4 ) ).toBeTruthy ();
 
   } );
 
   it ( '英文字符长度范围测试', () => {
 
-    expect ( letterReg ( '', [ 1, 2 ] ) ).toBeFalsy ();
+    expect ( letterReg ( '', 2 ) ).toBeFalsy ();
 
-    expect ( letterReg ( 'aaa', [ 2, 2 ] ) ).toBeFalsy ();
+    expect ( letterReg ( 'aaa', 2 ) ).toBeFalsy ();
 
-    expect ( letterReg ( '', [ 0, 2 ] ) ).toBeTruthy ();
+    expect ( letterReg ( 'hh', 2 ) ).toBeTruthy ();
 
   } );
 
@@ -119,15 +119,13 @@ describe ( '英文数字字符正则测试', () => {
 
   it ( '英文数字字符长度范围测试', () => {
 
-    expect ( letterNumberReg ( '', [ 1, 2 ] ) ).toBeFalsy ();
+    expect ( letterNumberReg ( '' ) ).toBeFalsy ();
 
-    expect ( letterNumberReg ( 'aaa', [ 2, 3 ] ) ).toBeTruthy ();
+    expect ( letterNumberReg ( 'aaa' ) ).toBeTruthy ();
 
-    expect ( letterNumberReg ( '123', [ 2, 3 ] ) ).toBeTruthy ();
+    expect ( letterNumberReg ( '123' ) ).toBeTruthy ();
 
-    expect ( letterNumberReg ( 'aaa123', [ 2, 6 ] ) ).toBeTruthy ();
-
-    expect ( letterNumberReg ( '', [ 0, 2 ] ) ).toBeTruthy ();
+    expect ( letterNumberReg ( 'aaa123' ) ).toBeTruthy ();
 
   } );
 
