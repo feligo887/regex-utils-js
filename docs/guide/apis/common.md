@@ -370,3 +370,220 @@ strictPasswordReg ( '123vhvhx!@' ) // true
 strictPasswordReg ( '123x!Z@12' ) // true
 
 ```
+
+## 昵称正则校验
+
+- 描述
+
+校验用户昵称等，昵称规则: 只要是字母、数字或中文即可
+
+- Type
+
+```ts
+  type  fieldNameReg = ( str:string ) => boolean
+```
+
+- 参数说明
+
+1. `str`需要校验的昵称
+
+- 示例
+
+```js
+import { fieldNameReg } from 'regex-utils-js';
+
+fieldNameReg ( '123' ) // true
+
+fieldNameReg ( '张三' ) // true
+
+fieldNameReg ( '张三123' ) // true
+
+fieldNameReg ( '张三abc' ) // true
+
+fieldNameReg ( '张三李四a' ) // true
+
+fieldNameReg ( 'abc123' ) // true
+
+```
+
+## 十六进制颜色校验
+
+- 描述
+
+十六进制颜色正则校验, `#000`, `#666`, `#fff`, `#FFF`
+
+- Type
+
+```ts
+  type  hexColorReg = ( str:string ) => boolean
+```
+
+- 参数说明
+
+1. `str`需要校验的颜色值
+
+- 示例
+
+```js
+import { hexColorReg } from 'regex-utils-js';
+
+hexColorReg ( '#fff' ) // true
+
+hexColorReg ( '#fffff' ) // true
+
+hexColorReg ( '#123fff' ) // true
+
+hexColorReg ( '#FFFbb1' ) // true
+
+```
+
+## 数字金额正则校验
+
+- 描述
+
+校验金额格式的正则，支持负数、小数、整数
+
+- Type
+
+```ts
+  type  moneyReg = ( str: string, options?: { minus?: boolean, decimalsMax?: number } ) => boolean
+```
+
+- 参数说明
+
+1. `str`需要校验的金额字符串
+2. `options.minus` 是否是负数, 默认`false`
+3. `options.decimalsMax` 最大小数位, 默认`8`位小数
+
+- 示例
+
+```js
+import { moneyReg } from 'regex-utils-js';
+
+moneyReg ( '0' ) // true
+
+moneyReg ( '0.00' ) // true
+
+moneyReg ( '11.01' ) // true
+
+moneyReg ( '-0.111', { minus: true } ) // true
+
+moneyReg ( '100.00', { decimalsMax: 2 } ) // true
+
+```
+
+## 千分位数字正则校验
+
+- 描述
+
+千分位正则校验, 支持小数 `10,000.00`、 `100,000,000`、 `199999`
+
+- Type
+
+```ts
+  type  thousandsMoneyReg = ( str: string ) => boolean
+```
+
+- 参数说明
+
+1. `str`需要校验的字符串
+
+- 示例
+
+```js
+import { thousandsMoneyReg } from 'regex-utils-js';
+
+thousandsMoneyReg ( '10,000.00' ) // true
+
+thousandsMoneyReg ( '100,000,000' ) // true
+
+thousandsMoneyReg ( '199999' ) // true
+```
+
+## IP地址正则校验
+
+- 描述
+
+ip地址格式校验
+
+- Type
+
+```ts
+  type  ipReg = ( str: string ) => boolean
+```
+
+- 参数说明
+
+1. `str`需要校验的ip地址
+
+- 示例
+
+```js
+import { ipReg } from 'regex-utils-js';
+
+ipReg ( '127.0.0.1' ) // true
+
+ipReg ( '192.168.10.1' ) // true
+
+ipReg ( '255.22.255.255' ) // true
+```
+
+## 日期格式正则校验
+
+- 描述
+
+校验日期格式字符串，如`2022-08-01`、`2022/08/01`
+
+- Type
+
+```ts
+  type  dateReg = ( str: string ) => boolean
+```
+
+- 参数说明
+
+1. `str`需要校验的日期字符串
+
+- 示例
+
+```js
+import { dateReg } from 'regex-utils-js';
+
+dateReg ( '2019-01-01' ) // true
+
+dateReg ( '2019-1-1' ) // true
+
+dateReg ( '2019/1/1' ) // true
+
+dateReg ( '2019/01/01' ) // true
+```
+
+## 日期时间格式正则校验
+
+- 描述
+
+校验日期时间格式字符串，如`2022-08-01 10:00:00`、`2022/08/01 10:00:00`
+
+- Type
+
+```ts
+  type  dateTimeReg = ( str: string ) => boolean
+```
+
+- 参数说明
+
+1. `str`需要校验的日期时间字符串
+
+- 示例
+
+```js
+import { dateTimeReg } from 'regex-utils-js';
+
+dateTimeReg ( '2019-01-01 10:00:00' ) // true
+
+dateTimeReg ( '2019-1-1 1:0:0' ) // true
+
+dateTimeReg ( '2019/1/1 10:00:00' ) // true
+
+dateTimeReg ( '2019/01/01 1:0:0' ) // true
+```
