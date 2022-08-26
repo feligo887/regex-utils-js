@@ -426,17 +426,17 @@ describe ( '金额测试', () => {
 
     expect ( moneyReg ( '0.1' ) ).toBeTruthy ();
 
-    expect ( moneyReg ( '11.100' ) ).toBeTruthy ();
+    expect ( moneyReg ( '11.100', { decimalsMax: 3 } ) ).toBeTruthy ();
 
     expect ( moneyReg ( '100.00' ) ).toBeTruthy ();
 
     expect ( moneyReg ( '101.1' ) ).toBeTruthy ();
 
-    expect ( moneyReg ( '9999.0001' ) ).toBeTruthy ();
+    expect ( moneyReg ( '9999.00' ) ).toBeTruthy ();
 
     expect ( moneyReg ( '-11', { minus: true } ) ).toBeTruthy ();
 
-    expect ( moneyReg ( '-0.111', { minus: true } ) ).toBeTruthy ();
+    expect ( moneyReg ( '-0.11', { minus: true } ) ).toBeTruthy ();
 
     expect ( moneyReg ( '12.11', { decimalsMax: 2 } ) ).toBeTruthy ();
 
