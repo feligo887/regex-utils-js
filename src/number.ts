@@ -39,7 +39,7 @@ export function integerReg ( str: string, minus?: boolean ): boolean {
 
 export function looseDecimalsReg ( str: string, decimalsMax?: number ): boolean {
 
-  const reg = RegExp ( `^(-)?\\d+\.{1,1}\\d{1,${ decimalsMax || 8 }}$`, 'g' );
+  const reg = RegExp ( `^(-)?\\d+\.\\d{1,${ decimalsMax || 8 }}$`, 'g' );
 
   return reg.test ( str );
 
