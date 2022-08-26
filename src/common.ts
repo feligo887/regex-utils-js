@@ -1,6 +1,6 @@
-import { strictDecimalsReg, integerReg } from './number';
+import { strictDecimalsReg, integerReg } from './';
 
-import { letterNumberReg, letterZhNumberReg, chineseReg } from './string';
+import { letterNumberReg, letterZhNumberReg, chineseReg } from './';
 
 /**
  *  常规邮箱格式校验
