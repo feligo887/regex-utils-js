@@ -48,6 +48,8 @@ describe ( '整数正则测试', () => {
 
     expect ( integerReg ( '-102', true ) ).toBeTruthy ();
 
+    expect ( integerReg ( '102', true ) ).toBeTruthy ();
+
   } );
 
 } );

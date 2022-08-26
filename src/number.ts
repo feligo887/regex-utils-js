@@ -14,7 +14,7 @@ export function largeNumberReg ( str: string ): boolean {
 
 
 /**
- * 数字正则校验
+ * 整数数字正则校验
  * @description
  * @param { string } str 需要检查的字符串
  * @param { boolean } minus 是否支持负数
@@ -23,7 +23,7 @@ export function largeNumberReg ( str: string ): boolean {
 
 export function integerReg ( str: string, minus?: boolean ): boolean {
 
-  const reg = `^${ minus ? '(?:-)' : '' }[1-9]+[0-9]*$`;
+  const reg = `^${ minus ? '-?' : '' }[1-9]+[0-9]*$`;
 
   return RegExp ( reg ).test ( str );
 
@@ -39,7 +39,7 @@ export function integerReg ( str: string, minus?: boolean ): boolean {
 
 export function looseDecimalsReg ( str: string, decimalsMax?: number ): boolean {
 
-  const reg = RegExp ( `^(-)?\\d+\.\\d{1,${ decimalsMax || 8 }}$`, 'g' );
+  const reg = RegExp ( `^-?\\d+\.\\d{1,${ decimalsMax || 8 }}$`, 'g' );
 
   return reg.test ( str );
 
