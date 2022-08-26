@@ -374,11 +374,19 @@ describe ( '昵称正则测试', () => {
 
   it ( '昵称合法性正则测试', () => {
 
-    expect ( fieldNameReg ( '@12' ) ).toBeTruthy ();
+    expect ( fieldNameReg ( '123' ) ).toBeTruthy ();
 
-    expect ( fieldNameReg ( '123aaa123aaa123aaa123aaa' ) ).toBeTruthy ();
+    expect ( fieldNameReg ( '张三' ) ).toBeTruthy ();
 
-    expect ( fieldNameReg ( '!@2+-gg' ) ).toBeTruthy ();
+    expect ( fieldNameReg ( '张三123' ) ).toBeTruthy ();
+
+    expect ( fieldNameReg ( '张三abc' ) ).toBeTruthy ();
+
+    expect ( fieldNameReg ( 'zhangsan' ) ).toBeTruthy ();
+
+    expect ( fieldNameReg ( 'zhangsan123' ) ).toBeTruthy ();
+
+    expect ( fieldNameReg ( 'zhangsan123李四' ) ).toBeTruthy ();
 
   } );
 
@@ -397,6 +405,12 @@ describe ( '颜色正则测试', () => {
     expect ( hexColorReg ( '#123' ) ).toBeTruthy ();
 
     expect ( hexColorReg ( '#ffffff' ) ).toBeTruthy ();
+
+    expect ( hexColorReg ( '#FFFFFF' ) ).toBeTruthy ();
+
+    expect ( hexColorReg ( '#FFFFbb' ) ).toBeTruthy ();
+
+    expect ( hexColorReg ( '#FFFbb1' ) ).toBeTruthy ();
 
   } );
 
@@ -468,6 +482,10 @@ describe ( '日期测试', () => {
 
     expect ( dateReg ( '2019-1-1' ) ).toBeTruthy ();
 
+    expect ( dateReg ( '2019/1/1' ) ).toBeTruthy ();
+
+    expect ( dateReg ( '2019/01/11' ) ).toBeTruthy ();
+
     expect ( dateReg ( '2019-01-1' ) ).toBeTruthy ();
 
   } );
@@ -483,6 +501,8 @@ describe ( '日期测试', () => {
     expect ( dateTimeReg ( '2019-06-01 10::00:00' ) ).toBeFalsy ();
 
     expect ( dateTimeReg ( '2019-08-01 10:00:00' ) ).toBeTruthy ();
+
+    expect ( dateTimeReg ( '2019/08/01 10:00:00' ) ).toBeTruthy ();
 
     expect ( dateTimeReg ( '2019-10-01 1:0:0' ) ).toBeTruthy ();
 
