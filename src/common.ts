@@ -1,5 +1,7 @@
 import { strictDecimalsReg, integerReg } from './number';
 
+import { letterNumberReg, letterZhNumberReg, chineseReg } from './string';
+
 /**
  *  常规邮箱格式校验
  * @description  `gaozihang-001@gmail.com` 只允许英文字母、数字、下划线、英文句号、以及中划线组成
@@ -195,7 +197,7 @@ export function strictPasswordReg ( str: string, len?: [ number, number] ): bool
 
 /**
  * 昵称正则校验
- * @description 昵称规则:数字、大小写字母和特殊字符-_+，长度不超过30个字符
+ * @description 昵称规则: 中文组合、英文数字组合，英文中文数字组合
  *  @param { string } str 需要校验的字符串
  *  @return boolean
  * **/
@@ -203,9 +205,7 @@ export function strictPasswordReg ( str: string, len?: [ number, number] ): bool
 
 export function fieldNameReg ( str: string ): boolean {
 
-  const reg = /^[a-zA-Z0-9\d!@#$&*\(\)_\-+=\[\]:;\?,.]{1,30}$/;
-
-  return reg.test ( str );
+  return chineseReg ( str ) || letterNumberReg ( str ) || letterZhNumberReg ( str );
 
 }
 
@@ -234,7 +234,7 @@ export function hexColorReg ( str: string ): boolean {
  * @return boolean
  * **/
 
-export function moneyReg ( str: string, options?: { minus?: boolean, decimalsMax?: 2 } ): boolean {
+export function moneyReg ( str: string, options?: { minus?: boolean, decimalsMax?: number } ): boolean {
 
   return integerReg ( str, options?.minus ) || strictDecimalsReg ( str, options );
 
@@ -253,7 +253,7 @@ export function thousandsMoneyReg ( str: string ): boolean {
 
   const reg = '^([0-9]+|[0-9]{1,3}(,[0-9]{3})*)(.[0-9]{1,2})?$';
 
-  return RegExp ( reg ).test ( str );
+  return RegExp ( reg, 'g' ).test ( str );
 
 }
 
@@ -273,14 +273,14 @@ export function ipReg ( str: string ): boolean {
 
 /**
  * 日期格式正则校验
- * @description 校验日期格式 2020-01-01、2020-1-1
+ * @description 校验日期格式 2020-01-01、2020/1/1
  * param { string } str 需要校验的字符串
  * @return boolean
  * **/
 
 export function dateReg ( str: string ): boolean {
 
-  const reg = '^\\d{4}-\\d{1,2}-\\d{1,2}';
+  const reg = '^\\d{4}[-\\/]\\d{1,2}[-\\/]\\d{1,2}';
 
   return RegExp ( reg, 'g' ).test ( str );
 
@@ -295,7 +295,7 @@ export function dateReg ( str: string ): boolean {
 
 export function dateTimeReg ( str: string ): boolean {
 
-  const reg = '^\\d{4}-\\d{1,2}-\\d{1,2}\\s\\d{1,2}:\\d{1,2}:\\d{1,2}';
+  const reg = '^\\d{4}[-\\/]\\d{1,2}[-\\/]\\d{1,2}\\s\\d{1,2}:\\d{1,2}:\\d{1,2}';
 
   return RegExp ( reg, 'g' ).test ( str );
 

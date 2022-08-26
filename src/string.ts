@@ -22,7 +22,7 @@ export function chineseReg ( str: string, scope?: [ number, number ] ): boolean 
  * @return boolean
  * **/
 
-export function englishReg ( str: string, scope?: [ number, number ] ): boolean {
+export function letterReg ( str: string, scope?: [ number, number ] ): boolean {
 
   const reg = `^[a-zA-Z]{${ scope ? scope.join ( ',' ) : '1,' }}$`;
 
@@ -37,7 +37,7 @@ export function englishReg ( str: string, scope?: [ number, number ] ): boolean 
  * @param { [ number, number ] } scope 可指定英文字符的长度范围
  * **/
 
-export function upperEnglishReg ( str: string, scope?: [ number, number ] ): boolean {
+export function upperLetterReg ( str: string, scope?: [ number, number ] ): boolean {
 
   const reg = `^[A-Z]{${ scope ? scope.join ( ',' ) : '1,' }}$`;
 
@@ -52,7 +52,7 @@ export function upperEnglishReg ( str: string, scope?: [ number, number ] ): boo
  * @param { [ number, number ] } scope 可指定英文字符的长度范围
  * **/
 
-export function lowerEnglishReg ( str: string, scope?: [ number, number ] ): boolean {
+export function lowerLetterReg ( str: string, scope?: [ number, number ] ): boolean {
 
   const reg = `^[a-z]{${ scope ? scope.join ( ',' ) : '1,' }}$`;
 
@@ -67,7 +67,7 @@ export function lowerEnglishReg ( str: string, scope?: [ number, number ] ): boo
 * @param { [ number, number ] } scope 可指定英文数字字符的长度范围
  * **/
 
-export function englishNumberReg ( str: string, scope?: [ number, number ] ): boolean {
+export function letterNumberReg ( str: string, scope?: [ number, number ] ): boolean {
 
   const reg = `^[A-Za-z0-9]{${ scope ? scope.join ( ',' ) : '1,'}}$`;
 
@@ -81,7 +81,7 @@ export function englishNumberReg ( str: string, scope?: [ number, number ] ): bo
  * @param { string } str 字符串
  * **/
 
-export function enZhNumberReg ( str: string ): boolean {
+export function letterZhNumberReg ( str: string ): boolean {
 
   const reg = '^[\\u4E00-\\u9FA5A-Za-z0-9_]+$';
 
