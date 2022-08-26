@@ -11,10 +11,6 @@ describe ( '中文字符正则测试', () => {
 
     expect ( chineseReg ( '123' ) ).toBeFalsy ();
 
-    expect ( chineseReg ( '...@!!!' ) ).toBeFalsy ();
-
-    expect ( chineseReg ( '，' ) ).toBeFalsy ();
-
     expect ( chineseReg ( '  ' ) ).toBeFalsy ();
 
     expect ( chineseReg ( '中文' ) ).toBeTruthy ();
@@ -33,9 +29,9 @@ describe ( '中文字符正则测试', () => {
 
 } );
 
-describe ( '英文字符正则测试', () => {
+describe ( '字母字符正则测试', () => {
 
-  it ( '英文字符测试', () => {
+  it ( '字母字符测试', () => {
 
     expect ( letterReg ( '...@!!!' ) ).toBeFalsy ();
 
@@ -113,7 +109,7 @@ describe ( '英文数字字符正则测试', () => {
 
     expect ( letterNumberReg ( 'ADSDS123' ) ).toBeTruthy ();
 
-    expect ( letterNumberReg ( 'zhangsanADSDS123' ) ).toBeTruthy ();
+    expect ( letterNumberReg ( 'sanAS123' ) ).toBeTruthy ();
 
   } );
 
@@ -121,11 +117,33 @@ describe ( '英文数字字符正则测试', () => {
 
     expect ( letterNumberReg ( '' ) ).toBeFalsy ();
 
-    expect ( letterNumberReg ( 'aaa' ) ).toBeTruthy ();
+    expect ( letterNumberReg ( 'aaa', 3 ) ).toBeTruthy ();
 
-    expect ( letterNumberReg ( '123' ) ).toBeTruthy ();
+    expect ( letterNumberReg ( '123', 3 ) ).toBeTruthy ();
 
-    expect ( letterNumberReg ( 'aaa123' ) ).toBeTruthy ();
+    expect ( letterNumberReg ( 'aaa123', 6 ) ).toBeTruthy ();
+
+  } );
+
+} );
+
+describe ( '中文、英文、数字正则测试', () => {
+
+  it ( '字符有效性测试', () => {
+
+    expect ( letterZhNumberReg ( '中文' ) ).toBeTruthy ();
+
+    expect ( letterZhNumberReg ( 'abc' ) ).toBeTruthy ();
+
+    expect ( letterZhNumberReg ( 'ABC' ) ).toBeTruthy ();
+
+    expect ( letterZhNumberReg ( 'ABC123' ) ).toBeTruthy ();
+
+    expect ( letterZhNumberReg ( 'ABCaz123' ) ).toBeTruthy ();
+
+    expect ( letterZhNumberReg ( '123' ) ).toBeTruthy ();
+
+    expect ( letterZhNumberReg ( '中文ABCaz123' ) ).toBeTruthy ();
 
   } );
 
@@ -147,33 +165,11 @@ describe ( '所有格式字符校验正则测试', () => {
 
     expect ( allStrReg ( 'zhangsan' ) ).toBeTruthy ();
 
-    expect ( allStrReg ( 'ADSDS123', [ 1, 2 ] ) ).toBeFalsy ();
+    expect ( allStrReg ( 'ADSDS123', 2 ) ).toBeFalsy ();
 
-    expect ( allStrReg ( 'AD', [ 1, 2 ] ) ).toBeTruthy ();
+    expect ( allStrReg ( 'AD', 3 ) ).toBeTruthy ();
 
-    expect ( allStrReg ( 'zhangsanADSDS123' ) ).toBeTruthy ();
-
-  } );
-
-} );
-
-describe ( '中文+英文+数字包括下划线正则测试', () => {
-
-  it ( '字符有效性测试', () => {
-
-    expect ( letterZhNumberReg ( '中文' ) ).toBeTruthy ();
-
-    expect ( letterZhNumberReg ( 'abc' ) ).toBeTruthy ();
-
-    expect ( letterZhNumberReg ( 'ABC' ) ).toBeTruthy ();
-
-    expect ( letterZhNumberReg ( 'ABC123' ) ).toBeTruthy ();
-
-    expect ( letterZhNumberReg ( 'ABCaz123' ) ).toBeTruthy ();
-
-    expect ( letterZhNumberReg ( '123' ) ).toBeTruthy ();
-
-    expect ( letterZhNumberReg ( '中文ABCaz123' ) ).toBeTruthy ();
+    expect ( allStrReg ( 'zhangsanADSDS123', 20 ) ).toBeTruthy ();
 
   } );
 

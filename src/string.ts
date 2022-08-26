@@ -47,7 +47,7 @@ export function upperLetterReg ( str: string, maxLen?: number ): boolean {
 
 /**
  * 小写英文字符校验
- * @description 大写英文字符，只要是大写字母即可(只能有大写字母)
+ * @description 小写英文字符，只要是小写字母即可(只能有小写字母)
  * @param { string } str 需要验证的字符串
  * @param { number } maxLen 小写字母字符最大位数
  * **/
@@ -62,27 +62,29 @@ export function lowerLetterReg ( str: string, maxLen?:number ): boolean {
 
 /**
  * 字母+数字字符校验
- * @description 字母+数字字符, 只要是字母和数字即可(只能有大小写字母和数字)，默认最少1个
+ * @description 字母+数字字符, 只要是字母和数字即可(只能有大小写字母和数字)
  * @param { string } str 英文数字字符
+ * @param { number } maxLen 字符最大位数
  * **/
 
-export function letterNumberReg ( str: string ): boolean {
+export function letterNumberReg ( str: string, maxLen?:number ): boolean {
 
-  const reg = '^[A-Za-z0-9]+$';
+  const reg = `^[A-Za-z0-9]{1,${maxLen || 10 }}$`;
 
   return RegExp ( reg, 'g' ).test ( str );
 
 }
 
 /**
- * 汉字、字母、数字字符,包括下划线校验
- * @description 中文、英文、数字字符, 只要是中文、英文、数字、下划线即可
+ * 汉字、字母、数字字符
+ * @description 中文、英文、数字字符, 只要是中文、英文、数字即可
  * @param { string } str 字符串
+ @param { number } maxLen 字符最大位数
  * **/
 
-export function letterZhNumberReg ( str: string ): boolean {
+export function letterZhNumberReg ( str: string, maxLen?: number ): boolean {
 
-  const reg = '^[\\u4E00-\\u9FA5A-Za-z0-9_]+$';
+  const reg = `^[\\u4E00-\\u9FA5A-Za-z0-9]{1,${maxLen || 10}}$`;
 
   return RegExp ( reg, 'g' ).test ( str );
 
@@ -92,13 +94,13 @@ export function letterZhNumberReg ( str: string ): boolean {
  * 所有格式字符校验
  * @description 所有格式字符，包含空白字符 默认最少1个，暂时不知道用于什么场景
  * @param { string } str 需要校验的字符串
- * @param { string } lens 可指定所有格式字符的长度范围，默认 1,
+ * @param { number } maxLen 字符最大位数
  *
  * **/
 
-export function allStrReg ( str: string, lens?: [ number, number ] ): boolean {
+export function allStrReg ( str: string, maxLen?:number ): boolean {
 
-  const reg = `^.{${ lens ? lens.join ( ',' ) : '1,' }}$`;
+  const reg = `^.{1,${maxLen || 10}}$`;
 
   return RegExp ( reg, 'gmi' ).test ( str );
 
@@ -108,17 +110,17 @@ export function allStrReg ( str: string, lens?: [ number, number ] ): boolean {
  * 特殊字符校验
  * @description 特殊字符，包含空白字符 默认最少1个，暂时不知道用于什么场景
  * @param { string } str 需要校验的字符串
- * @param { string } len 可指定特殊字符，默认 !@#$%^&*()_+-=[]{}|;':",./<>?
+ * @param { string } scope 可指定特殊字符，默认 !@#$%^&*()_+-=[]{}|;':",./<>?
  *
  * **/
 
-export function specialStrReg ( str: string, len?: string ): boolean {
+export function specialStrReg ( str: string, scope?: string ): boolean {
 
   const defaultSpecial = '!@#$%^&*()_+-=[\\]{}|;\':",\\./<>?';
 
-  const reg = `^[${ len || defaultSpecial }]+$`;
+  const reg = `^[${ scope || defaultSpecial }]+$`;
 
-  return RegExp ( reg, 'gmi' ).test ( str );
+  return RegExp ( reg, 'g' ).test ( str );
 
 }
 
@@ -127,12 +129,12 @@ export function specialStrReg ( str: string, len?: string ): boolean {
  * @description 自定义字符范围校验，可以指定自定义字符范围及长度
  * @param { string } str 需要校验的字符串
  * @param { string } scope 自定义字符范围
- * @param { [ number, number ] } len 可指定自定义字符范围的长度范围
+ * @param { [ number, number ] } lens 可指定自定义字符范围的长度范围
  * **/
 
-export function customStrReg ( str: string, scope: string, len?: [ number, number ] ): boolean {
+export function customStrReg ( str: string, scope: string, lens?: [ number, number ] ): boolean {
 
-  const regStr = `^[${ scope }]{${ len ? len.join ( ',' ) : '1,' }}$`;
+  const regStr = `^[${ scope }]{${ lens ? lens.join ( ',' ) : '1,' }}$`;
 
   return RegExp ( regStr, 'g' ).test ( str );
 
