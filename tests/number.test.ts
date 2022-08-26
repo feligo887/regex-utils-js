@@ -64,9 +64,9 @@ describe ( '小数正则测试', () => {
 
     expect ( looseDecimalsReg ( '12.21' ) ).toBeTruthy ();
 
-    expect ( looseDecimalsReg ( '00.0123' ) ).toBeTruthy ();
+    expect ( looseDecimalsReg ( '00.0123', 4 ) ).toBeTruthy ();
 
-    expect ( looseDecimalsReg ( '00.0123' ) ).toBeTruthy ();
+    expect ( looseDecimalsReg ( '01.0123', 4 ) ).toBeTruthy ();
 
     expect ( looseDecimalsReg ( '11.22' ) ).toBeTruthy ();
 
@@ -76,7 +76,7 @@ describe ( '小数正则测试', () => {
 
   } );
 
-  it ( '合法性测试', () => {
+  it ( '严格小数测试', () => {
 
     expect ( strictDecimalsReg ( '0.' ) ).toBeFalsy ();
 
@@ -88,9 +88,11 @@ describe ( '小数正则测试', () => {
 
     expect ( strictDecimalsReg ( '-0.0123' ) ).toBeFalsy ();
 
-    expect ( strictDecimalsReg ( '0.0123' ) ).toBeTruthy ();
+    expect ( strictDecimalsReg ( '0.0123', { decimalsMax: 4 } ) ).toBeTruthy ();
 
     expect ( strictDecimalsReg ( '-0.01', { minus: true } ) ).toBeTruthy ();
+
+    expect ( strictDecimalsReg ( '0.01', { minus: true } ) ).toBeTruthy ();
 
     expect ( strictDecimalsReg ( '12.21' ) ).toBeTruthy ();
 

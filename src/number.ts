@@ -39,7 +39,7 @@ export function integerReg ( str: string, minus?: boolean ): boolean {
 
 export function looseDecimalsReg ( str: string, decimalsMax?: number ): boolean {
 
-  const reg = RegExp ( `^-?\\d+\.\\d{1,${ decimalsMax || 8 }}$`, 'g' );
+  const reg = RegExp ( `^-?\\d+\.\\d{1,${ decimalsMax || 2 }}$`, 'g' );
 
   return reg.test ( str );
 
@@ -47,7 +47,7 @@ export function looseDecimalsReg ( str: string, decimalsMax?: number ): boolean 
 
 /**
  * 严格小数正则校验, 支持负数
- * @description 01.xxx 00.xxx 不可通过， 支持 0
+ * @description 01.xxx 00.xxx 不可通过
  * @param { string } str 需要检查的字符串
  * @param { Object } options 配置项
  * @param { number } options.decimalsMax 支持的小数位数，默认八位小数
@@ -58,7 +58,7 @@ export function strictDecimalsReg ( str: string, options?: { decimalsMax?: numbe
 
   const minusReg = options && options.minus ? '-?' : '';
 
-  const decimalsReg = options && options.decimalsMax ? `{1,${options.decimalsMax}}` : '{1,8}';
+  const decimalsReg = options && options.decimalsMax ? `{1,${options.decimalsMax}}` : '{1,2}';
 
   const reg = `(^${minusReg}[1-9]\\d*\.\\d${decimalsReg}$|^${minusReg}0\\.\\d${decimalsReg}$|^${minusReg}[1-9]\\d{1,2}$|^0{1}$)`;
 
